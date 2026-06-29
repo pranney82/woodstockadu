@@ -1,0 +1,20 @@
+# Cloudflare Pages config for woodstockadu.com
+# Most settings can also be configured in the Cloudflare dashboard; this file
+# lets you manage them in code. Replace database_id after you create the D1 DB.
+
+name = "woodstockadu"
+compatibility_date = "2026-06-01"
+pages_build_output_dir = "."
+
+# D1 database binding (used by functions/api/lead.js as env.DB)
+[[d1_databases]]
+binding = "DB"
+database_name = "woodstockadu-leads"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+
+# Non-secret vars for email notifications (optional).
+# Set RESEND_API_KEY as a SECRET, not here:
+#   npx wrangler pages secret put RESEND_API_KEY
+[vars]
+LEAD_TO = "you@woodstockadu.com"
+LEAD_FROM = "leads@woodstockadu.com"
