@@ -10,7 +10,7 @@ pages_build_output_dir = "."
 [[d1_databases]]
 binding = "DB"
 database_name = "woodstockadu-leads"
-database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+database_id = "3c71e7c4-a0ab-4ce6-85e8-3d803d924c32"
 
 # Non-secret vars for email notifications (optional).
 # Set RESEND_API_KEY as a SECRET, not here:
