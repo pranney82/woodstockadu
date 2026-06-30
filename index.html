@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="color-scheme" content="light">
 <script>document.documentElement.classList.add('js')</script>
 
@@ -84,7 +84,7 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth;scroll-padding-top:88px}
-  body{background:var(--paper);color:var(--ink);font-family:"Hanken Grotesk",system-ui,sans-serif;font-size:18px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body{background:var(--paper);color:var(--ink);font-family:"Hanken Grotesk",system-ui,sans-serif;font-size:18px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-tap-highlight-color:rgba(44,74,59,.12)}
   /* subtle paper grain */
   body::before{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.04;mix-blend-mode:multiply;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
@@ -93,7 +93,7 @@
   a{color:inherit}
   img{max-width:100%}
   ::selection{background:var(--honey-soft);color:var(--pine-deep)}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 max(28px,env(safe-area-inset-right)) 0 max(28px,env(safe-area-inset-left));position:relative}
   .eyebrow{font-family:"Space Mono",monospace;font-size:12.5px;text-transform:uppercase;letter-spacing:0.24em;color:var(--pine);display:inline-flex;align-items:center;gap:10px}
   .eyebrow::before{content:"";width:22px;height:1px;background:linear-gradient(90deg,transparent,var(--honey))}
   section{padding:104px 0;position:relative}
@@ -111,6 +111,7 @@
   .btn-honey:hover{transform:translateY(-2px);box-shadow:0 18px 44px -12px var(--glow)}
   .btn[disabled]{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
   :focus-visible{outline:3px solid var(--honey);outline-offset:3px;border-radius:6px}
+  .btn,button,summary,.plan,.pp,.tier,.opt,.pm-thumb,.nav-toggle{touch-action:manipulation}
 
   /* header */
   header.nav{position:sticky;top:0;z-index:1000;background:rgba(245,241,232,.78);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border-bottom:1px solid var(--line);transition:background .3s,border-color .3s,box-shadow .3s}
@@ -132,7 +133,7 @@
   .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
   @media(max-width:920px){
     .nav-toggle{display:flex}
-    .nav-links{position:fixed;left:0;right:0;top:76px;flex-direction:column;align-items:flex-start;gap:4px;padding:14px 28px 24px;background:rgba(245,241,232,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);box-shadow:0 24px 40px -30px rgba(31,42,36,.5);transform:translateY(-14px);opacity:0;visibility:hidden;transition:transform .28s var(--ease),opacity .22s}
+    .nav-links{position:fixed;left:0;right:0;top:76px;flex-direction:column;align-items:flex-start;gap:4px;padding:14px 28px 24px;background:rgba(245,241,232,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);box-shadow:0 24px 40px -30px rgba(31,42,36,.5);transform:translateY(-14px);opacity:0;visibility:hidden;overscroll-behavior:contain;transition:transform .28s var(--ease),opacity .22s}
     .nav-links.open{transform:none;opacity:1;visibility:visible}
     .nav-links a{font-size:18px;padding:12px 0;width:100%}
     .btn{padding:12px 18px;font-size:15px}
@@ -192,7 +193,7 @@
 
   .addr-row{display:flex;gap:10px;margin-bottom:18px}
   .addr-row input{flex:1;font-family:inherit;font-size:16px;padding:14px 16px;border:1.6px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink)}
-  #map{height:340px;border-radius:14px;border:1px solid var(--line);margin-bottom:18px;background:var(--panel);z-index:1}
+  #map{height:340px;border-radius:14px;border:1px solid var(--line);margin-bottom:18px;background:var(--panel);z-index:1;overscroll-behavior:contain}
   .elig-card{border-radius:14px;padding:20px 22px;border:1px solid var(--line);display:none;color:var(--ink)}
   .elig-card.show{display:block}
   .elig-card.go{background:var(--sage);border-color:var(--go)}
@@ -217,6 +218,10 @@
   .pp .mn{font-family:"Space Mono";font-size:10.5px;color:var(--pine)}
   .pp.unfit{opacity:.5;cursor:not-allowed}
   .pp.unfit:hover{transform:none;box-shadow:none}
+  .pp-wrap{display:flex;flex-direction:column;gap:8px}
+  .pp-wrap .pp{flex:1}
+  .pp-view{font-family:"Space Grotesk";font-weight:600;font-size:12.5px;color:var(--pine);background:transparent;border:1px dashed var(--line);border-radius:10px;padding:8px 10px;cursor:pointer;transition:border-color .15s,background .15s}
+  .pp-view:hover{border-color:var(--pine);background:var(--white)}
   .opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .opt{display:flex;align-items:center;gap:12px;border:1.6px solid var(--line);border-radius:12px;padding:13px 15px;cursor:pointer;background:var(--paper);font-size:15px;color:var(--ink);transition:border-color .15s,background .15s}
   .opt:hover{border-color:var(--pine)}
@@ -264,6 +269,41 @@
   .plan .mn{font-family:"Space Mono";font-size:11px;color:var(--pine);border-top:1px dashed var(--line);padding-top:10px}
   @media(max-width:1000px){.plans{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:560px){.plans{grid-template-columns:1fr}}
+  /* plan card is now a button that opens the detail modal */
+  .plan{cursor:pointer;font:inherit;text-align:left;width:100%;color:inherit;-webkit-appearance:none;appearance:none}
+  .plan .vw{display:flex;align-items:center;gap:7px;margin-top:12px;font-family:"Space Grotesk";font-weight:600;font-size:13px;color:var(--pine);transition:gap .2s var(--ease)}
+  .plan .vw svg{width:15px;height:15px;flex:0 0 auto}
+  .plan:hover .vw{gap:11px}
+
+  /* ===== plan detail modal ===== */
+  body.pm-open{overflow:hidden}
+  .pm[hidden]{display:none}
+  .pm{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;padding:24px}
+  .pm-backdrop{position:absolute;inset:0;background:rgba(26,34,29,.62);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);animation:pmFade .25s var(--ease)}
+  .pm-dialog{position:relative;z-index:1;width:min(960px,100%);max-height:90vh;max-height:90dvh;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:var(--paper);border:1px solid var(--line);border-radius:22px;box-shadow:0 50px 90px -40px rgba(20,30,24,.7);display:grid;grid-template-columns:1.15fr .85fr;animation:pmPop .32s var(--ease)}
+  @keyframes pmFade{from{opacity:0}to{opacity:1}}
+  @keyframes pmPop{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+  .pm-x{position:absolute;top:14px;right:14px;z-index:3;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--white);color:var(--ink);font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .25s var(--ease)}
+  .pm-x:hover{background:var(--panel);transform:rotate(90deg)}
+  .pm-media{background:#fff;border-right:1px solid var(--line);padding:22px;display:flex;flex-direction:column;gap:14px;border-radius:22px 0 0 22px}
+  .pm-img{width:100%;aspect-ratio:4/3;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px}
+  .pm-thumbs{display:flex;gap:10px;flex-wrap:wrap}
+  .pm-thumb{flex:0 0 auto;width:88px;height:66px;border:1.6px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;cursor:pointer;padding:0;transition:border-color .15s,box-shadow .2s}
+  .pm-thumb img{width:100%;height:100%;object-fit:contain;padding:4px}
+  .pm-thumb[aria-pressed="true"]{border-color:var(--pine);box-shadow:0 8px 20px -12px rgba(44,74,59,.6)}
+  .pm-thumb.soon{cursor:default;display:flex;align-items:center;justify-content:center;text-align:center;font-family:"Space Mono";font-size:9px;line-height:1.35;letter-spacing:.03em;color:var(--ink-soft);padding:6px;background:var(--paper)}
+  .pm-info{padding:30px 30px 28px;display:flex;flex-direction:column}
+  .pm-sub{font-family:"Space Mono";font-size:11.5px;color:var(--honey);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+  .pm-info h3{font-size:27px;font-weight:700;margin:0 0 14px}
+  .pm-specs{margin:0 0 16px}
+  .pm-specs .r{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:15px}
+  .pm-specs .r:last-child{border-bottom:0}
+  .pm-specs .r span{color:var(--ink-soft)}
+  .pm-specs .r b{font-family:"Space Grotesk";color:var(--ink);text-align:right}
+  .pm-note{font-size:13.5px;color:var(--ink-soft);background:var(--sage);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 18px}
+  .pm-cta{display:flex;gap:12px;margin-top:auto;flex-wrap:wrap}
+  .pm-cta .btn{flex:1;min-width:150px}
+  @media(max-width:760px){.pm{padding:14px}.pm-dialog{grid-template-columns:1fr;max-height:92vh;max-height:92dvh}.pm-media{border-right:0;border-bottom:1px solid var(--line);border-radius:22px 22px 0 0}.pm-info{padding:24px 22px 26px}}
 
   .steps{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--white)}
   .step{padding:30px 28px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transition:background .25s}
@@ -282,7 +322,7 @@
   details[open] summary .pl{transform:rotate(45deg)}
   details .ans{padding:0 24px 22px;color:var(--ink-soft);font-size:16.5px}
 
-  footer{background:var(--pine-deep);color:var(--sage);padding:72px 0 36px}
+  footer{background:var(--pine-deep);color:var(--sage);padding:72px 0 calc(36px + env(safe-area-inset-bottom))}
   .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:36px;margin-bottom:36px}
   footer .brand{color:var(--white);margin-bottom:14px}
   footer .brand .mk{color:var(--sage)}
@@ -305,6 +345,42 @@
     html.js [data-reveal-group].in>*:nth-child(6){transition-delay:.35s}
     html.js [data-reveal-group].in>*:nth-child(7){transition-delay:.42s}
     html.js [data-reveal-group].in>*:nth-child(8){transition-delay:.49s}
+  }
+
+  /* ===== mobile refinements — top-tier touch experience ===== */
+  @media(max-width:760px){
+    section{padding:68px 0}
+    .hero{padding:60px 0 52px}
+    .sec-head{margin-bottom:38px}
+  }
+  @media(max-width:480px){
+    section{padding:54px 0}
+    .hero{padding:52px 0 44px}
+    .addrbar{flex-direction:column;border-radius:18px;padding:9px;gap:9px;max-width:100%}
+    .addrbar input{padding:6px 10px}
+    .addrbar .btn{width:100%}
+    .addr-row{flex-direction:column}
+    .addr-row .btn{width:100%}
+    #map{height:300px}
+    .estimate .amt{font-size:34px}
+    .wz-body h3{font-size:23px}
+  }
+
+  /* sticky conversion bar — phones only */
+  .mobile-cta{display:none}
+  @media(max-width:760px){
+    .mobile-cta{position:fixed;left:12px;right:12px;z-index:1500;bottom:calc(12px + env(safe-area-inset-bottom));
+      display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 12px 12px 20px;
+      border-radius:18px;text-decoration:none;background:linear-gradient(180deg,var(--pine),var(--pine-deep));color:var(--white);
+      box-shadow:0 20px 44px -18px rgba(11,21,16,.85),0 0 0 1px var(--hairline-2);
+      transform:translateY(180%);opacity:0;visibility:hidden;
+      transition:transform .42s var(--ease),opacity .3s,visibility .3s;will-change:transform}
+    .mobile-cta.show{transform:none;opacity:1;visibility:visible}
+    .mobile-cta .mc-txt{display:flex;flex-direction:column;line-height:1.18}
+    .mobile-cta .mc-txt b{font-family:"Space Grotesk";font-weight:700;font-size:15.5px;letter-spacing:-.01em}
+    .mobile-cta .mc-txt span{font-size:12px;color:var(--sage)}
+    .mobile-cta .mc-arrow{flex:0 0 auto;width:40px;height:40px;border-radius:50%;color:#3a2a08;font-size:20px;font-weight:700;
+      display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#D7A23C,var(--honey))}
   }
 
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
@@ -345,7 +421,7 @@
       <h1>A second home in your backyard — <span class="ac">permitted, priced, done.</span></h1>
       <p class="lead">Enter your address to instantly check if your lot qualifies against the City of Woodstock's own zoning map, see real pricing, and reserve your build online.</p>
       <form class="addrbar" id="heroForm" role="search" aria-label="Check your address">
-        <input id="heroAddr" type="text" placeholder="Enter your Woodstock property address" autocomplete="street-address" aria-label="Property address">
+        <input id="heroAddr" type="text" placeholder="Enter your Woodstock property address" autocomplete="street-address" enterkeyhint="search" autocapitalize="words" autocorrect="off" aria-label="Property address">
         <button class="btn btn-primary" type="submit">Check my lot →</button>
       </form>
       <div class="hero-note"><span class="dot"></span> Live check against Woodstock city-limits &amp; zoning data — no obligation.</div>
@@ -353,7 +429,7 @@
 
     <div class="siteplan" data-parallax>
       <div class="stamp">Pre-Approved</div>
-      <img src="assets/plans/overlook.png" width="1000" height="862" alt="The Overlook — a 1,064 sq ft pre-approved Woodstock ADU with a second-floor deck and gable roof">
+      <img src="assets/plans/overlook.png" width="1000" height="862" fetchpriority="high" decoding="async" alt="The Overlook — a 1,064 sq ft pre-approved Woodstock ADU with a second-floor deck and gable roof">
       <div class="caption">The Overlook · 1,064 sq ft</div>
     </div>
   </div>
@@ -390,7 +466,7 @@
           <h3>Is your lot eligible?</h3>
           <p class="sub">We check your address against the City of Woodstock's official city-limits and zoning layers in real time.</p>
           <div class="addr-row">
-            <input id="wzAddr" type="text" placeholder="123 Main St, Woodstock, GA 30188" autocomplete="street-address">
+            <input id="wzAddr" type="text" placeholder="123 Main St, Woodstock, GA 30188" autocomplete="street-address" enterkeyhint="search" autocapitalize="words" autocorrect="off">
             <button class="btn btn-primary" id="wzCheck">Check</button>
           </div>
           <div id="map"></div>
@@ -538,6 +614,34 @@
   </div>
 </footer>
 
+<!-- ============ STICKY MOBILE CTA (phones only) ============ -->
+<a class="mobile-cta" id="mobileCta" href="#build" aria-label="Check your lot's eligibility">
+  <span class="mc-txt"><b>Check your lot's eligibility</b><span>Free · instant · no obligation</span></span>
+  <span class="mc-arrow" aria-hidden="true">→</span>
+</a>
+
+<!-- ============ PLAN DETAIL MODAL ============ -->
+<div class="pm" id="planModal" hidden>
+  <div class="pm-backdrop" data-pmclose></div>
+  <div class="pm-dialog" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+    <button class="pm-x" type="button" data-pmclose aria-label="Close plan details">&times;</button>
+    <div class="pm-media">
+      <img class="pm-img" id="pmImg" alt="" width="800" height="600">
+      <div class="pm-thumbs" id="pmThumbs"></div>
+    </div>
+    <div class="pm-info">
+      <div class="pm-sub">Pre-approved design</div>
+      <h3 id="pmTitle">—</h3>
+      <div class="pm-specs" id="pmSpecs"></div>
+      <p class="pm-note">Want different materials, windows, or interior layout? Any plan can be customized through our licensed design professional.</p>
+      <div class="pm-cta">
+        <button class="btn btn-honey" type="button" id="pmPrice">Price this plan →</button>
+        <button class="btn btn-ghost" type="button" data-pmclose>Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin=""></script>
 <script>
 /* =========================================================================
@@ -545,15 +649,15 @@
    Base prices are rough placeholders; replace with your real per-plan cost.
    ========================================================================= */
 const PLANS = [
-  {id:'p631', name:'The Carriage', sf:631,  cfg:'1 bed · 1 bath · living loft over a 2-car garage', minPrimary:1578, base:188000, img:'assets/plans/carriage.png',
+  {id:'p631', name:'The Carriage', sf:631,  cfg:'1 bed · 1 bath · living loft over a 2-car garage', minPrimary:1578, base:188000, img:'assets/plans/carriage.png', floor:'assets/plans/carriage-floor.png',
      art:'<path d="M14 56V30l36-18 36 18v26"/><path d="M10 30l40-20 40 20"/><rect x="40" y="38" width="14" height="18"/>'},
-  {id:'p660', name:'The Cottage', sf:660,  cfg:'1 bed · 1 bath · single-level, no garage', minPrimary:1650, base:192000, img:'assets/plans/cottage.png',
+  {id:'p660', name:'The Cottage', sf:660,  cfg:'1 bed · 1 bath · single-level, no garage', minPrimary:1650, base:192000, img:'assets/plans/cottage.png', floor:'assets/plans/cottage-floor.png',
      art:'<path d="M22 56V36h56v20"/><path d="M16 36l34-14 34 14"/><rect x="44" y="42" width="14" height="14"/>'},
-  {id:'p684', name:'The Bungalow', sf:684,  cfg:'1 bed · 1 bath · single-level with a 2-car garage', minPrimary:1710, base:208000, img:'assets/plans/bungalow.png',
+  {id:'p684', name:'The Bungalow', sf:684,  cfg:'1 bed · 1 bath · single-level with a 2-car garage', minPrimary:1710, base:208000, img:'assets/plans/bungalow.png', floor:'assets/plans/bungalow-floor.png',
      art:'<path d="M16 56V34h68v22"/><path d="M10 34l40-16 40 16"/><rect x="60" y="40" width="18" height="16"/>'},
-  {id:'p1032',name:'The Homestead', sf:1032, cfg:'1 bed · 1 bath · spacious single-level + 2-car garage', minPrimary:2580, base:266000, img:'assets/plans/homestead.png',
+  {id:'p1032',name:'The Homestead', sf:1032, cfg:'1 bed · 1 bath · spacious single-level + 2-car garage', minPrimary:2580, base:266000, img:'assets/plans/homestead.png', floor:'assets/plans/homestead-floor.png',
      art:'<path d="M14 56V32h72v24"/><path d="M9 32l41-15 41 15"/><rect x="22" y="40" width="16" height="16"/><rect x="62" y="40" width="16" height="16"/>'},
-  {id:'p1064',name:'The Overlook', sf:1064, cfg:'1 bed · 1 bath · living loft over 2-car garage + private deck', minPrimary:2660, base:286000, img:'assets/plans/overlook.png',
+  {id:'p1064',name:'The Overlook', sf:1064, cfg:'1 bed · 1 bath · living loft over 2-car garage + private deck', minPrimary:2660, base:286000, img:'assets/plans/overlook.png', floor:'assets/plans/overlook-floor.png',
      art:'<path d="M12 56V28l38-16 38 16v28"/><path d="M8 28l42-18 42 18"/><rect x="58" y="40" width="20" height="16"/><path d="M14 52h20v4H14z"/>'}
 ];
 const TIERS = {essential:1.0, signature:1.12, premium:1.25};
@@ -680,7 +784,13 @@ function gotoStep(n){
   });
   if(n===2) renderPlans2();
   if(n===4) renderSummary();
-  document.getElementById('build').scrollIntoView({behavior:'smooth',block:'start'});
+  // Keep the step bar in view, but only scroll when the wizard is actually
+  // off-screen — prevents the page from jumping on every Continue/Back click.
+  const wz=document.querySelector('.wizard');
+  if(wz){
+    const t=wz.getBoundingClientRect().top;
+    if(t<0 || t>window.innerHeight-160) wz.scrollIntoView({behavior:'smooth',block:'start'});
+  }
 }
 
 /* Step 2 — fit plans to 40% rule */
@@ -694,9 +804,12 @@ function renderPlans2(){
   const grid=document.getElementById('planPick');
   grid.innerHTML=PLANS.map(p=>{
     const fits = !maxAdu || p.sf<=maxAdu;
-    return `<button type="button" class="pp ${fits?'':'unfit'}" data-plan="${p.id}" ${fits?'':'disabled'} aria-pressed="${state.plan===p.id}">
-      <div class="sf">${p.name}</div><div class="cf">${p.sf} sq ft · ${p.cfg}</div>
-      <div class="mn">${fits?'FITS YOUR LOT':'NEEDS A LARGER HOME'}</div></button>`;
+    return `<div class="pp-wrap">
+      <button type="button" class="pp ${fits?'':'unfit'}" data-plan="${p.id}" ${fits?'':'disabled'} aria-pressed="${state.plan===p.id}">
+        <div class="sf">${p.name}</div><div class="cf">${p.sf} sq ft · ${p.cfg}</div>
+        <div class="mn">${fits?'FITS YOUR LOT':'NEEDS A LARGER HOME'}</div></button>
+      <button type="button" class="pp-view" data-view="${p.id}">View floor plan ↗</button>
+    </div>`;
   }).join('');
   grid.querySelectorAll('.pp:not(.unfit)').forEach(b=>b.onclick=()=>{
     state.plan=b.dataset.plan;
@@ -704,6 +817,10 @@ function renderPlans2(){
     b.setAttribute('aria-pressed','true');
     document.getElementById('to3').disabled=false;
   });
+  grid.querySelectorAll('.pp-view').forEach(b=>b.onclick=()=>openPlan(b.dataset.view));
+  // a plan preselected from the gallery's "Price this plan" CTA enables Continue
+  const cur = state.plan && PLANS.find(x=>x.id===state.plan);
+  if(cur && (!maxAdu || cur.sf<=maxAdu)) document.getElementById('to3').disabled=false;
 }
 document.getElementById('primarySf').addEventListener('input',renderPlans2);
 
@@ -804,11 +921,59 @@ document.getElementById('reserveBtn').onclick=async function(){
   else { this.textContent='Reservation requested ✓'; }
 };
 
-/* plans gallery */
+/* plans gallery — each card opens a detail modal */
 document.getElementById('plansGrid').innerHTML=PLANS.map(p=>`
-  <div class="plan"><div class="art"><img src="${p.img}" alt="${p.name} — front elevation of the ${p.sf} sq ft pre-approved Woodstock ADU" loading="lazy" width="1000"></div>
-  <div class="pb"><div class="sf">${p.name}</div><div class="cf"><b class="mono" style="color:var(--honey)">${p.sf} SQ FT</b> · ${p.cfg}</div>
-  <div class="mn">MIN. PRIMARY HOME — ${p.minPrimary.toLocaleString()} SQ FT</div></div></div>`).join('');
+  <button type="button" class="plan" data-plan="${p.id}" aria-haspopup="dialog">
+    <div class="art"><img src="${p.img}" alt="${p.name} — front elevation of the ${p.sf} sq ft pre-approved Woodstock ADU" loading="lazy" width="1000"></div>
+    <div class="pb"><div class="sf">${p.name}</div><div class="cf"><b class="mono" style="color:var(--honey)">${p.sf} SQ FT</b> · ${p.cfg}</div>
+    <div class="mn">MIN. PRIMARY HOME — ${p.minPrimary.toLocaleString()} SQ FT</div>
+    <div class="vw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>View floor plan &amp; specs →</div>
+  </button>`).join('');
+document.querySelectorAll('#plansGrid .plan').forEach(b=>b.addEventListener('click',()=>openPlan(b.dataset.plan)));
+
+/* ---- plan detail modal ---- */
+const planModal=document.getElementById('planModal');
+const pmImg=document.getElementById('pmImg');
+const pmThumbs=document.getElementById('pmThumbs');
+let pmCurrent=null, pmOpener=null;
+
+function pmThumbFail(img){
+  const t=img.closest('.pm-thumb');
+  t.classList.add('soon'); t.setAttribute('aria-pressed','false');
+  t.innerHTML=t.dataset.label+'<br>coming soon';
+}
+function openPlan(id){
+  const p=PLANS.find(x=>x.id===id); if(!p) return;
+  pmCurrent=id; pmOpener=document.activeElement;
+  document.getElementById('pmTitle').textContent=p.name;
+  document.getElementById('pmSpecs').innerHTML=
+     `<div class="r"><span>Size</span><b>${p.sf.toLocaleString()} sq ft</b></div>`
+    +`<div class="r"><span>Layout</span><b>${p.cfg}</b></div>`
+    +`<div class="r"><span>Min. primary home</span><b>${p.minPrimary.toLocaleString()} sq ft</b></div>`;
+  pmImg.src=p.img; pmImg.alt=`${p.name} — front elevation`;
+  const views=[{src:p.img,label:'Front elevation'},{src:p.floor,label:'Floor plan'}];
+  pmThumbs.innerHTML=views.map((v,i)=>
+    `<button type="button" class="pm-thumb" data-src="${v.src}" data-label="${v.label}" aria-pressed="${i===0}" title="${v.label}"><img src="${v.src}" alt="${p.name} — ${v.label}" onerror="pmThumbFail(this)"></button>`
+  ).join('');
+  pmThumbs.querySelectorAll('.pm-thumb').forEach(t=>t.addEventListener('click',()=>{
+    if(t.classList.contains('soon')) return;
+    pmImg.src=t.dataset.src; pmImg.alt=`${p.name} — ${t.dataset.label}`;
+    pmThumbs.querySelectorAll('.pm-thumb').forEach(x=>x.setAttribute('aria-pressed','false'));
+    t.setAttribute('aria-pressed','true');
+  }));
+  planModal.hidden=false; document.body.classList.add('pm-open');
+  document.querySelector('.pm-x').focus();
+}
+function closePlan(){
+  planModal.hidden=true; document.body.classList.remove('pm-open');
+  if(pmOpener&&pmOpener.focus) pmOpener.focus();
+}
+planModal.querySelectorAll('[data-pmclose]').forEach(el=>el.addEventListener('click',closePlan));
+document.getElementById('pmPrice').addEventListener('click',()=>{
+  const id=pmCurrent; closePlan();
+  if(id){ state.plan=id; gotoStep(2); }
+});
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&!planModal.hidden) closePlan(); });
 
 /* init */
 renderOpts(); estimate(); initMap();
@@ -888,6 +1053,29 @@ renderOpts(); estimate(); initMap();
       window.addEventListener('scroll', function(){ if(!ticking){ requestAnimationFrame(apply); ticking = true; } }, {passive:true});
       apply();
     }
+  }
+
+  /* Sticky mobile conversion bar — appears after the hero while browsing the
+     lower sections, hides whenever the wizard (#build) or footer is on screen. */
+  var mcta = document.getElementById('mobileCta');
+  if(mcta){
+    var zones = [document.getElementById('build'), document.getElementById('contact')].filter(Boolean);
+    var visibleZones = (typeof Set !== 'undefined') ? new Set() : null;
+    var updateCta = function(){
+      var pastHero = window.scrollY > window.innerHeight * 0.55;
+      var nearZone = visibleZones ? visibleZones.size > 0 : false;
+      mcta.classList.toggle('show', pastHero && !nearZone);
+    };
+    if('IntersectionObserver' in window && zones.length && visibleZones){
+      var zObs = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){ en.isIntersecting ? visibleZones.add(en.target) : visibleZones.delete(en.target); });
+        updateCta();
+      }, {threshold:0, rootMargin:'0px 0px -10% 0px'});
+      zones.forEach(function(z){ zObs.observe(z); });
+    }
+    window.addEventListener('scroll', updateCta, {passive:true});
+    window.addEventListener('resize', updateCta);
+    updateCta();
   }
 })();
 </script>
