@@ -1,0 +1,16 @@
+{
+  "name": "woodstockadu",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static marketing site + lead backend for woodstockadu.com (Cloudflare Pages + D1)",
+  "scripts": {
+    "dev": "PATH=\"/opt/homebrew/opt/node@23/bin:$PATH\" wrangler pages dev .",
+    "deploy": "PATH=\"/opt/homebrew/opt/node@23/bin:$PATH\" wrangler pages deploy .",
+    "db:init": "PATH=\"/opt/homebrew/opt/node@23/bin:$PATH\" wrangler d1 execute woodstockadu-leads --remote --file=./schema.sql",
+    "db:init:local": "PATH=\"/opt/homebrew/opt/node@23/bin:$PATH\" wrangler d1 execute woodstockadu-leads --local --file=./schema.sql",
+    "leads": "PATH=\"/opt/homebrew/opt/node@23/bin:$PATH\" wrangler d1 execute woodstockadu-leads --remote --command \"SELECT created_at,intent,name,email,phone,plan,estimate FROM leads ORDER BY id DESC LIMIT 20\""
+  },
+  "devDependencies": {
+    "wrangler": "^4.105.0"
+  }
+}

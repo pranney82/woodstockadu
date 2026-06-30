@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<script>document.documentElement.classList.add('js')</script>
 
 <!-- ============================ SEO ============================ -->
 <title>Woodstock ADU | Pre-Approved Accessory Dwelling Units in Woodstock, GA</title>
@@ -28,7 +30,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Hanken+Grotesk:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,400..600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
 
 <!-- ===================== Structured data (JSON-LD) ===================== -->
@@ -66,87 +68,132 @@
 
 <style>
   :root{
-    --paper:#F5F1E8; --paper2:#EFEADD; --panel:#EAE4D5; --ink:#1F2A24; --ink-soft:#4B584F;
-    --pine:#2C4A3B; --pine-deep:#21382D; --honey:#BD8A2C; --honey-soft:#E7D3A3;
-    --line:#C7BEA9; --sage:#D9E0D2; --white:#FBFAF6; --go:#3C7A57; --maxw:1200px; --r:16px;
-    --shadow:0 28px 56px -34px rgba(31,42,36,.5);
+    /* Light "architect's paper" palette — used inside the wizard / interactive tool */
+    --paper:#F4EFE3; --paper2:#ECE5D6; --panel:#E6DECB; --ink:#1C2620; --ink-soft:#55635A;
+    --pine:#2C4A3B; --pine-deep:#1E3328; --honey:#C28E2E; --honey-soft:#E7D3A3;
+    --line:#D2C9B4; --sage:#DCE3D6; --white:#FCFBF7; --go:#3C7A57;
+    /* Dark cinematic frame — the rest of the page */
+    --night:#0B1510; --night-2:#0F1B15; --night-3:#14241B;
+    --on-dark:#ECE6D6; --on-dark-soft:#9DB0A1;
+    --hairline:rgba(236,230,214,.10); --hairline-2:rgba(214,168,74,.26);
+    --honey-bright:#E6B252; --glow:rgba(214,168,74,.45);
+    --maxw:1200px; --r:16px;
+    --shadow:0 30px 60px -38px rgba(31,42,36,.5);
+    --shadow-paper:0 26px 56px -34px rgba(31,42,36,.42);
+    --ease:cubic-bezier(.16,.84,.44,1);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{background:var(--paper);color:var(--ink);font-family:"Hanken Grotesk",system-ui,sans-serif;font-size:18px;line-height:1.62;-webkit-font-smoothing:antialiased}
-  h1,h2,h3,.display{font-family:"Space Grotesk",sans-serif;line-height:1.04;letter-spacing:-0.022em}
+  html{scroll-behavior:smooth;scroll-padding-top:88px}
+  body{background:var(--paper);color:var(--ink);font-family:"Hanken Grotesk",system-ui,sans-serif;font-size:18px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  /* subtle paper grain */
+  body::before{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.04;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  h1,h2,h3,.display{font-family:"Space Grotesk",sans-serif;line-height:1.04;letter-spacing:-0.024em;color:var(--ink)}
   .mono{font-family:"Space Mono",monospace}
   a{color:inherit}
   img{max-width:100%}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
-  .eyebrow{font-family:"Space Mono",monospace;font-size:12.5px;text-transform:uppercase;letter-spacing:0.2em;color:var(--pine)}
-  section{padding:92px 0}
-  .sec-head{max-width:42em;margin-bottom:48px}
-  .sec-head h2{font-size:clamp(29px,3.7vw,44px);font-weight:700;margin:14px 0 0}
-  .sec-head p{color:var(--ink-soft);margin-top:14px;font-size:18.5px}
+  ::selection{background:var(--honey-soft);color:var(--pine-deep)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative}
+  .eyebrow{font-family:"Space Mono",monospace;font-size:12.5px;text-transform:uppercase;letter-spacing:0.24em;color:var(--pine);display:inline-flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:22px;height:1px;background:linear-gradient(90deg,transparent,var(--honey))}
+  section{padding:104px 0;position:relative}
+  .sec-head{max-width:42em;margin-bottom:52px}
+  .sec-head h2{font-size:clamp(30px,4vw,48px);font-weight:700;margin:16px 0 0}
+  .sec-head h2 .ac{font-family:"Fraunces",serif;font-style:italic;font-weight:500;color:var(--pine)}
+  .sec-head p{color:var(--ink-soft);margin-top:16px;font-size:18.5px}
 
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:"Space Grotesk";font-weight:600;font-size:16px;padding:15px 24px;border-radius:999px;border:1.6px solid var(--pine);text-decoration:none;cursor:pointer;transition:transform .15s,background .15s,color .15s;background:transparent;color:var(--pine)}
-  .btn-primary{background:var(--pine);color:var(--white)}
-  .btn-primary:hover{transform:translateY(-2px);background:var(--pine-deep)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:"Space Grotesk";font-weight:600;font-size:16px;padding:15px 26px;border-radius:999px;border:1.6px solid var(--pine);text-decoration:none;cursor:pointer;transition:transform .18s var(--ease),box-shadow .25s,background .2s,color .2s,border-color .2s;background:transparent;color:var(--pine);position:relative}
+  .btn-primary{background:var(--pine);color:var(--white);border-color:var(--pine);box-shadow:0 14px 30px -16px rgba(33,56,45,.7)}
+  .btn-primary:hover{transform:translateY(-2px);background:var(--pine-deep);box-shadow:0 20px 42px -16px rgba(33,56,45,.6)}
+  .btn-ghost{border-color:var(--pine);color:var(--pine);background:transparent}
   .btn-ghost:hover{background:var(--sage);transform:translateY(-2px)}
-  .btn-honey{background:var(--honey);border-color:var(--honey);color:#3a2a08}
-  .btn-honey:hover{transform:translateY(-2px);filter:brightness(1.05)}
-  .btn[disabled]{opacity:.4;cursor:not-allowed;transform:none}
+  .btn-honey{background:linear-gradient(180deg,#D7A23C,var(--honey));border-color:transparent;color:#3a2a08;box-shadow:0 12px 30px -12px var(--glow),inset 0 1px 0 rgba(255,255,255,.35)}
+  .btn-honey:hover{transform:translateY(-2px);box-shadow:0 18px 44px -12px var(--glow)}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
   :focus-visible{outline:3px solid var(--honey);outline-offset:3px;border-radius:6px}
 
   /* header */
-  header.nav{position:sticky;top:0;z-index:1000;background:rgba(245,241,232,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-  .nav-in{display:flex;align-items:center;justify-content:space-between;height:74px}
-  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;font-family:"Space Grotesk";font-weight:700;font-size:21px;letter-spacing:-0.02em}
-  .brand .mk{width:32px;height:32px;flex:0 0 auto}
-  .nav-links{display:flex;align-items:center;gap:30px}
-  .nav-links a{text-decoration:none;font-weight:500;font-size:15.5px;color:var(--ink-soft)}
+  header.nav{position:sticky;top:0;z-index:1000;background:rgba(245,241,232,.78);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border-bottom:1px solid var(--line);transition:background .3s,border-color .3s,box-shadow .3s}
+  header.nav.scrolled{background:rgba(245,241,232,.93);box-shadow:0 16px 36px -28px rgba(31,42,36,.45)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:76px;gap:16px}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;font-family:"Space Grotesk";font-weight:700;font-size:21px;letter-spacing:-0.02em;color:var(--ink)}
+  .brand .mk{width:30px;height:30px;flex:0 0 auto;color:var(--pine)}
+  .brand .brand-adu{color:var(--honey)}
+  .nav-links{display:flex;align-items:center;gap:32px}
+  .nav-links a{text-decoration:none;font-weight:500;font-size:15.5px;color:var(--ink-soft);transition:color .2s;position:relative}
+  .nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-6px;height:1.5px;background:var(--honey);transition:right .25s var(--ease)}
   .nav-links a:hover{color:var(--pine)}
-  @media(max-width:920px){.nav-links{display:none}.btn{padding:12px 18px;font-size:15px}}
+  .nav-links a:hover::after{right:0}
+  .nav-cta{display:flex;align-items:center;gap:12px}
+  .nav-toggle{display:none;width:44px;height:40px;border:1px solid var(--line);border-radius:11px;background:var(--white);cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0}
+  .nav-toggle span{width:18px;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s var(--ease),opacity .2s}
+  .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  @media(max-width:920px){
+    .nav-toggle{display:flex}
+    .nav-links{position:fixed;left:0;right:0;top:76px;flex-direction:column;align-items:flex-start;gap:4px;padding:14px 28px 24px;background:rgba(245,241,232,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);box-shadow:0 24px 40px -30px rgba(31,42,36,.5);transform:translateY(-14px);opacity:0;visibility:hidden;transition:transform .28s var(--ease),opacity .22s}
+    .nav-links.open{transform:none;opacity:1;visibility:visible}
+    .nav-links a{font-size:18px;padding:12px 0;width:100%}
+    .btn{padding:12px 18px;font-size:15px}
+  }
+  @media(max-width:430px){.nav-cta .btn{display:none}}
 
   /* hero */
-  .hero{padding:70px 0 30px;position:relative;overflow:hidden}
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}
-  .hero h1{font-size:clamp(40px,5.6vw,72px);font-weight:700;margin:18px 0 0}
-  .hero h1 .ac{color:var(--pine);font-style:italic}
-  .hero .lead{font-size:20px;color:var(--ink-soft);margin:22px 0 26px;max-width:31em}
-  .addrbar{display:flex;gap:10px;background:var(--white);border:1.6px solid var(--pine);border-radius:999px;padding:7px 7px 7px 20px;max-width:520px;box-shadow:var(--shadow)}
+  .hero{padding:84px 0 64px;position:relative;overflow:hidden;background:radial-gradient(120% 90% at 80% 0%,#FBF7EE 0%,var(--paper) 55%)}
+  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(44% 48% at 82% 16%,var(--glow) 0%,transparent 60%);opacity:.7}
+  .hero::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.6;
+    background-image:linear-gradient(rgba(44,74,59,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(44,74,59,.06) 1px,transparent 1px);
+    background-size:46px 46px;mask-image:radial-gradient(80% 70% at 50% 30%,#000 0%,transparent 80%);-webkit-mask-image:radial-gradient(80% 70% at 50% 30%,#000 0%,transparent 80%)}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center;position:relative;z-index:2}
+  .hero h1{font-size:clamp(42px,5.8vw,76px);font-weight:700;margin:20px 0 0}
+  .hero h1 .ac{font-family:"Fraunces",serif;font-style:italic;font-weight:500;color:var(--pine)}
+  .hero .lead{font-size:20px;color:var(--ink-soft);margin:24px 0 28px;max-width:31em}
+  .addrbar{display:flex;gap:10px;background:var(--white);border:1.6px solid var(--pine);border-radius:999px;padding:7px 7px 7px 22px;max-width:520px;box-shadow:var(--shadow)}
   .addrbar input{flex:1;border:0;background:transparent;font-family:inherit;font-size:16px;color:var(--ink);outline:none}
-  .addrbar .btn{padding:13px 20px;white-space:nowrap}
-  .hero-note{margin-top:16px;font-size:14px;color:var(--ink-soft);display:flex;align-items:center;gap:9px}
-  .dot{width:7px;height:7px;border-radius:50%;background:var(--honey)}
-  .siteplan{position:relative;background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:8px;box-shadow:var(--shadow)}
-  .siteplan svg{display:block;width:100%;height:auto}
-  .stamp{position:absolute;top:-16px;right:-10px;transform:rotate(-11deg);border:2.5px solid var(--honey);color:var(--honey);border-radius:8px;font-family:"Space Mono";font-weight:700;font-size:12.5px;letter-spacing:.12em;padding:7px 12px;text-transform:uppercase;background:rgba(251,250,246,.92)}
-  @media(max-width:880px){.hero-grid{grid-template-columns:1fr;gap:38px}.siteplan{order:-1}}
+  .addrbar input::placeholder{color:var(--ink-soft)}
+  .addrbar .btn{padding:13px 22px;white-space:nowrap}
+  .hero-note{margin-top:18px;font-size:14px;color:var(--ink-soft);display:flex;align-items:center;gap:9px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--honey);box-shadow:0 0 0 0 var(--glow);animation:pulse 2.6s var(--ease) infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 var(--glow)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+  .siteplan{position:relative;background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:10px;box-shadow:var(--shadow);will-change:transform}
+  .siteplan svg,.siteplan img{display:block;width:100%;height:auto;border-radius:10px}
+  .siteplan .caption{position:absolute;left:18px;bottom:18px;font-family:"Space Mono";font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--pine);background:rgba(251,250,246,.92);border:1px solid var(--line);padding:5px 11px;border-radius:8px;box-shadow:0 8px 20px -10px rgba(31,42,36,.45)}
+  .stamp{position:absolute;top:-16px;right:-10px;z-index:3;transform:rotate(-11deg);border:2.5px solid var(--honey);color:var(--honey);border-radius:8px;font-family:"Space Mono";font-weight:700;font-size:12.5px;letter-spacing:.12em;padding:7px 12px;text-transform:uppercase;background:rgba(251,250,246,.94);box-shadow:0 8px 26px -10px var(--glow)}
+  @media(max-width:880px){.hero-grid{grid-template-columns:1fr;gap:38px}.siteplan{order:-1}.hero::before{background:radial-gradient(60% 40% at 50% 6%,var(--glow),transparent 60%)}}
 
   /* trust */
-  .trust{background:var(--pine-deep);color:var(--sage)}
-  .trust-in{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:26px;padding:30px 0;align-items:center}
-  .trust .lede{font-family:"Space Grotesk";font-weight:600;color:var(--white);font-size:17px;line-height:1.3}
-  .trust .stat b{display:block;font-family:"Space Grotesk";font-weight:700;color:var(--white);font-size:26px}
-  .trust .stat span{font-size:13.5px}
-  @media(max-width:760px){.trust-in{grid-template-columns:1fr 1fr;gap:20px}.trust .lede{grid-column:1/-1}}
+  .trust{background:linear-gradient(180deg,var(--night-3),var(--pine-deep));color:var(--on-dark-soft);border-top:1px solid var(--hairline-2);border-bottom:1px solid var(--hairline);position:relative}
+  .trust-in{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:26px;padding:36px 0;align-items:center}
+  .trust .stat{position:relative;padding-left:26px}
+  .trust .stat::before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:1px;background:var(--hairline-2)}
+  .trust .lede{font-family:"Space Grotesk";font-weight:600;color:var(--on-dark);font-size:18px;line-height:1.32}
+  .trust .stat b{display:block;font-family:"Space Grotesk";font-weight:700;color:var(--honey-bright);font-size:30px;letter-spacing:-.02em}
+  .trust .stat span{font-size:13.5px;letter-spacing:.02em}
+  @media(max-width:760px){.trust-in{grid-template-columns:1fr 1fr;gap:22px}.trust .lede{grid-column:1/-1;padding-left:0}.trust .stat:nth-child(2){padding-left:0}.trust .stat:nth-child(2)::before{display:none}}
 
-  /* ===== WIZARD ===== */
+  /* ===== WIZARD (luminous paper tool on the dark page) ===== */
   .build{background:linear-gradient(180deg,var(--paper) 0%,var(--paper2) 100%)}
-  .wizard{background:var(--white);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
-  .wz-steps{display:flex;border-bottom:1px solid var(--line);background:var(--paper)}
-  .wz-steps .st{flex:1;padding:16px 12px;text-align:center;font-family:"Space Mono";font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);position:relative}
-  .wz-steps .st b{display:inline-flex;width:22px;height:22px;border-radius:50%;background:var(--panel);color:var(--ink-soft);align-items:center;justify-content:center;margin-right:7px;font-size:12px}
+  .build .sec-head{margin-left:auto;margin-right:auto}
+  .wizard{background:var(--white);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden;color:var(--ink);position:relative}
+  .wizard::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--honey),var(--honey-bright),var(--honey));z-index:5}
+  .wz-steps{display:flex;border-bottom:1px solid var(--line);background:var(--paper2)}
+  .wz-steps .st{flex:1;padding:18px 12px;text-align:center;font-family:"Space Mono";font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);position:relative}
+  .wz-steps .st b{display:inline-flex;width:22px;height:22px;border-radius:50%;background:var(--panel);color:var(--ink-soft);align-items:center;justify-content:center;margin-right:7px;font-size:12px;transition:background .3s,color .3s}
   .wz-steps .st.active{color:var(--pine)}
   .wz-steps .st.active b{background:var(--pine);color:var(--white)}
   .wz-steps .st.done b{background:var(--go);color:#fff}
-  .wz-body{padding:34px 36px 40px}
-  .wz-body h3{font-size:25px;font-weight:700;margin-bottom:6px}
+  .wz-body{padding:36px 38px 42px}
+  .wz-body h3{font-size:26px;font-weight:700;margin-bottom:6px;color:var(--ink)}
   .wz-body .sub{color:var(--ink-soft);margin-bottom:22px;font-size:16.5px}
-  .panel{display:none}.panel.show{display:block;animation:fade .4s ease}
-  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .panel{display:none}.panel.show{display:block;animation:fade .45s var(--ease)}
+  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
   .addr-row{display:flex;gap:10px;margin-bottom:18px}
-  .addr-row input{flex:1;font-family:inherit;font-size:16px;padding:14px 16px;border:1.6px solid var(--line);border-radius:12px;background:var(--paper)}
+  .addr-row input{flex:1;font-family:inherit;font-size:16px;padding:14px 16px;border:1.6px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink)}
   #map{height:340px;border-radius:14px;border:1px solid var(--line);margin-bottom:18px;background:var(--panel);z-index:1}
-  .elig-card{border-radius:14px;padding:20px 22px;border:1px solid var(--line);display:none}
+  .elig-card{border-radius:14px;padding:20px 22px;border:1px solid var(--line);display:none;color:var(--ink)}
   .elig-card.show{display:block}
   .elig-card.go{background:var(--sage);border-color:var(--go)}
   .elig-card.no{background:#F1E7D6;border-color:var(--honey)}
@@ -156,35 +203,39 @@
   .badge{font-family:"Space Mono";font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding:3px 9px;border-radius:6px;background:var(--white);border:1px solid var(--line)}
 
   .field{margin-bottom:18px}
-  .field label{display:block;font-weight:600;font-size:15px;margin-bottom:8px}
-  .field input,.field select{width:100%;font-family:inherit;font-size:16px;padding:13px 15px;border:1.6px solid var(--line);border-radius:12px;background:var(--paper)}
+  .field label{display:block;font-weight:600;font-size:15px;margin-bottom:8px;color:var(--ink)}
+  .field input,.field select{width:100%;font-family:inherit;font-size:16px;padding:13px 15px;border:1.6px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);transition:border-color .2s,box-shadow .2s}
+  .field input:focus{border-color:var(--pine);box-shadow:0 0 0 3px rgba(44,74,59,.12);outline:none}
   .help{font-size:13.5px;color:var(--ink-soft);margin-top:7px}
 
   .planpick{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-top:6px}
-  .pp{border:1.6px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;background:var(--paper);transition:border-color .15s,transform .15s;text-align:left}
-  .pp:hover{transform:translateY(-3px)}
+  .pp{border:1.6px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;background:var(--paper);transition:border-color .15s,transform .15s,box-shadow .2s;text-align:left;color:var(--ink)}
+  .pp:hover{transform:translateY(-3px);box-shadow:0 14px 30px -22px rgba(28,38,32,.7)}
   .pp[aria-pressed="true"]{border-color:var(--pine);background:var(--white);box-shadow:0 12px 26px -18px rgba(44,74,59,.6)}
   .pp .sf{font-family:"Space Grotesk";font-weight:700;font-size:19px}
   .pp .cf{font-size:12.5px;color:var(--ink-soft);margin:3px 0 8px;min-height:32px}
   .pp .mn{font-family:"Space Mono";font-size:10.5px;color:var(--pine)}
   .pp.unfit{opacity:.5;cursor:not-allowed}
-  .pp.unfit:hover{transform:none}
+  .pp.unfit:hover{transform:none;box-shadow:none}
   .opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .opt{display:flex;align-items:center;gap:12px;border:1.6px solid var(--line);border-radius:12px;padding:13px 15px;cursor:pointer;background:var(--paper);font-size:15px}
+  .opt{display:flex;align-items:center;gap:12px;border:1.6px solid var(--line);border-radius:12px;padding:13px 15px;cursor:pointer;background:var(--paper);font-size:15px;color:var(--ink);transition:border-color .15s,background .15s}
+  .opt:hover{border-color:var(--pine)}
   .opt input{width:18px;height:18px;accent-color:var(--pine)}
   .opt .pr{margin-left:auto;font-family:"Space Mono";font-size:13px;color:var(--ink-soft)}
   .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-  .tier{border:1.6px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;background:var(--paper);text-align:center}
-  .tier[aria-pressed="true"]{border-color:var(--pine);background:var(--white)}
+  .tier{border:1.6px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;background:var(--paper);text-align:center;color:var(--ink);transition:border-color .15s,transform .15s}
+  .tier:hover{transform:translateY(-2px)}
+  .tier[aria-pressed="true"]{border-color:var(--pine);background:var(--white);box-shadow:0 12px 26px -18px rgba(44,74,59,.5)}
   .tier b{font-family:"Space Grotesk";font-size:17px;display:block}
   .tier span{font-size:13px;color:var(--ink-soft)}
   @media(max-width:620px){.opt-grid,.tiers{grid-template-columns:1fr}.wz-body{padding:26px 22px 34px}.wz-steps .st{font-size:0}.wz-steps .st b{margin-right:0;font-size:13px}}
 
-  .estimate{background:var(--pine-deep);color:var(--white);border-radius:16px;padding:24px 26px;margin-top:8px}
-  .estimate .lbl{font-family:"Space Mono";font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--honey-soft)}
-  .estimate .amt{font-family:"Space Grotesk";font-weight:700;font-size:38px;margin:6px 0 2px}
-  .estimate small{color:var(--sage);font-size:13px}
-  .summary{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:18px}
+  .estimate{background:linear-gradient(155deg,var(--pine),var(--pine-deep));color:var(--white);border-radius:16px;padding:26px 28px;margin-top:8px;position:relative;overflow:hidden;box-shadow:0 26px 50px -32px rgba(30,51,40,.8)}
+  .estimate::after{content:"";position:absolute;top:-40%;right:-10%;width:240px;height:240px;background:radial-gradient(circle,var(--glow),transparent 70%);opacity:.5}
+  .estimate .lbl{font-family:"Space Mono";font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--honey-soft);position:relative}
+  .estimate .amt{font-family:"Space Grotesk";font-weight:700;font-size:40px;margin:6px 0 2px;position:relative;color:#fff}
+  .estimate small{color:var(--sage);font-size:13px;position:relative}
+  .summary{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:18px;color:var(--ink)}
   .summary .sr{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--line);font-size:15.5px}
   .summary .sr:last-child{border-bottom:0}
   .summary .sr span:first-child{color:var(--ink-soft)}
@@ -192,49 +243,69 @@
   .wz-foot{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:26px}
   .disc{font-size:12.5px;color:var(--ink-soft);margin-top:14px}
 
-  /* cards / plans / steps / faq (shared) */
+  /* cards / plans / steps / faq (warm paper) */
   .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .card{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:30px 26px;transition:transform .18s}
-  .card:hover{transform:translateY(-4px)}
-  .card .ic{width:42px;height:42px;color:var(--pine);margin-bottom:16px}
-  .card h3{font-size:21px;font-weight:600;margin-bottom:8px}.card p{font-size:16px;color:var(--ink-soft)}
+  .card{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:32px 28px;transition:transform .25s var(--ease),border-color .25s,box-shadow .25s}
+  .card:hover{transform:translateY(-6px);border-color:var(--honey-soft);box-shadow:var(--shadow-paper)}
+  .card .ic{width:44px;height:44px;color:var(--pine);margin-bottom:18px}
+  .card h3{font-size:21px;font-weight:600;margin-bottom:8px;color:var(--ink)}.card p{font-size:16px;color:var(--ink-soft)}
   @media(max-width:820px){.cards3{grid-template-columns:1fr}}
 
   .plans-sec{background:var(--panel)}
   .plans{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
-  .plan{background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
-  .plan .art{background:var(--sage);padding:20px;border-bottom:1px solid var(--line)}
+  .plan{background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s var(--ease),border-color .25s,box-shadow .25s}
+  .plan:hover{transform:translateY(-6px);border-color:var(--honey-soft);box-shadow:var(--shadow-paper)}
+  .plan .art{background:#fff;border-bottom:1px solid var(--line);position:relative;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .plan .art img{display:block;width:100%;height:100%;object-fit:contain;padding:12px}
   .plan .art svg{display:block;width:100%;height:72px}
-  .plan .pb{padding:16px 16px 20px}
-  .plan .sf{font-family:"Space Grotesk";font-weight:700;font-size:21px}
+  .plan .pb{padding:18px 18px 22px}
+  .plan .sf{font-family:"Space Grotesk";font-weight:700;font-size:21px;color:var(--ink)}
   .plan .cf{font-size:13px;color:var(--ink-soft);margin:4px 0 12px;min-height:36px}
   .plan .mn{font-family:"Space Mono";font-size:11px;color:var(--pine);border-top:1px dashed var(--line);padding-top:10px}
   @media(max-width:1000px){.plans{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:560px){.plans{grid-template-columns:1fr}}
 
   .steps{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--white)}
-  .step{padding:28px 26px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .step{padding:30px 28px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transition:background .25s}
+  .step:hover{background:var(--paper)}
   .step .n{font-family:"Space Mono";font-weight:700;color:var(--honey);font-size:14px}
-  .step h3{font-size:19px;font-weight:600;margin:8px 0 6px}.step p{font-size:15px;color:var(--ink-soft)}
+  .step h3{font-size:19px;font-weight:600;margin:8px 0 6px;color:var(--ink)}.step p{font-size:15px;color:var(--ink-soft)}
   .step .tag{margin-top:12px;display:inline-block;font-family:"Space Mono";font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--pine);background:var(--sage);padding:4px 9px;border-radius:6px}
   @media(max-width:820px){.steps{grid-template-columns:1fr}.step{border-right:0}}
 
   .faq-sec{background:var(--panel)}
-  details{background:var(--white);border:1px solid var(--line);border-radius:12px;margin-bottom:12px}
-  summary{cursor:pointer;padding:20px 24px;font-family:"Space Grotesk";font-weight:600;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+  details{background:var(--white);border:1px solid var(--line);border-radius:12px;margin-bottom:12px;transition:border-color .25s,box-shadow .25s}
+  details[open]{border-color:var(--honey-soft);box-shadow:var(--shadow-paper)}
+  summary{cursor:pointer;padding:22px 24px;font-family:"Space Grotesk";font-weight:600;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:16px;color:var(--ink)}
   summary::-webkit-details-marker{display:none}
-  summary .pl{color:var(--honey);font-size:24px;transition:transform .2s}
+  summary .pl{color:var(--honey);font-size:24px;transition:transform .25s var(--ease);line-height:1}
   details[open] summary .pl{transform:rotate(45deg)}
   details .ans{padding:0 24px 22px;color:var(--ink-soft);font-size:16.5px}
 
-  footer{background:var(--pine-deep);color:var(--sage);padding:62px 0 34px}
-  .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:36px;margin-bottom:34px}
+  footer{background:var(--pine-deep);color:var(--sage);padding:72px 0 36px}
+  .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:36px;margin-bottom:36px}
   footer .brand{color:var(--white);margin-bottom:14px}
+  footer .brand .mk{color:var(--sage)}
   footer p,footer a{font-size:15px;color:var(--sage);text-decoration:none;line-height:1.9}
-  footer a:hover{color:var(--white)}
+  footer a:hover{color:var(--honey-soft)}
   .foot-col h4{font-family:"Space Grotesk";color:var(--white);font-size:13px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px}
   .disclaimer{border-top:1px solid rgba(217,224,210,.2);padding-top:24px;font-size:12.5px;color:#9FAE9C;max-width:62em}
   @media(max-width:760px){.foot-grid{grid-template-columns:1fr}}
+
+  /* ===== scroll-reveal motion (only when JS present + motion allowed) ===== */
+  @media(prefers-reduced-motion:no-preference){
+    html.js [data-reveal]{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+    html.js [data-reveal].in{opacity:1;transform:none}
+    html.js [data-reveal-group]>*{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+    html.js [data-reveal-group].in>*{opacity:1;transform:none}
+    html.js [data-reveal-group].in>*:nth-child(2){transition-delay:.07s}
+    html.js [data-reveal-group].in>*:nth-child(3){transition-delay:.14s}
+    html.js [data-reveal-group].in>*:nth-child(4){transition-delay:.21s}
+    html.js [data-reveal-group].in>*:nth-child(5){transition-delay:.28s}
+    html.js [data-reveal-group].in>*:nth-child(6){transition-delay:.35s}
+    html.js [data-reveal-group].in>*:nth-child(7){transition-delay:.42s}
+    html.js [data-reveal-group].in>*:nth-child(8){transition-delay:.49s}
+  }
 
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
@@ -242,23 +313,26 @@
 <body>
 
 <!-- ============ NAV ============ -->
-<header class="nav">
+<header class="nav" id="siteNav">
   <div class="wrap nav-in">
     <a href="#top" class="brand" aria-label="Woodstock ADU home">
-      <svg class="mk" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-        <path d="M7 12.5h18a9 9 0 0 1-9 9 9 9 0 0 1-9-9Z" fill="#2C4A3B"/>
-        <path d="M8 12c0-2.7 3.6-4.6 8-4.6s8 1.9 8 4.6" stroke="#BD8A2C" stroke-width="2.3" stroke-linecap="round"/>
-        <path d="M16 7.4V3.6" stroke="#BD8A2C" stroke-width="2.3" stroke-linecap="round"/>
+      <svg class="mk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 4V2"/>
+        <path d="M5 10v4a7.004 7.004 0 0 0 5.277 6.787c.412.104.802.292 1.102.592L12 22l.621-.621c.3-.3.69-.488 1.102-.592A7.003 7.003 0 0 0 19 14v-4"/>
+        <path d="M12 4C8 4 4.5 6 4 8c-.243.97-.919 1.952-2 3 1.31-.082 1.972-.29 3-1 .54.92.982 1.356 2 2 1.452-.647 1.954-1.098 2.5-2 .595.995 1.151 1.427 2.5 2 1.31-.621 1.862-1.058 2.5-2 .629.977 1.162 1.423 2.5 2 1.209-.548 1.68-.967 2-2 1.032.916 1.683 1.157 3 1-1.297-1.036-1.758-2.03-2-3-.5-2-4-4-8-4Z"/>
       </svg>
-      Woodstock<span style="color:var(--honey)">ADU</span>
+      Woodstock<span class="brand-adu">ADU</span>
     </a>
-    <nav class="nav-links" aria-label="Primary">
+    <nav class="nav-links" id="navLinks" aria-label="Primary">
       <a href="#plans">Plans</a>
       <a href="#how">How it works</a>
       <a href="#build">Pricing &amp; eligibility</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a href="#build" class="btn btn-primary">Check your address</a>
+    <div class="nav-cta">
+      <a href="#build" class="btn btn-primary">Check your address</a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </header>
 <a id="top"></a>
@@ -266,7 +340,7 @@
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="wrap hero-grid">
-    <div>
+    <div data-reveal-group>
       <span class="eyebrow">Woodstock's pre-approved ADU builder</span>
       <h1>A second home in your backyard — <span class="ac">permitted, priced, done.</span></h1>
       <p class="lead">Enter your address to instantly check if your lot qualifies against the City of Woodstock's own zoning map, see real pricing, and reserve your build online.</p>
@@ -277,34 +351,18 @@
       <div class="hero-note"><span class="dot"></span> Live check against Woodstock city-limits &amp; zoning data — no obligation.</div>
     </div>
 
-    <div class="siteplan">
+    <div class="siteplan" data-parallax>
       <div class="stamp">Pre-Approved</div>
-      <svg viewBox="0 0 440 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Site plan: an accessory dwelling unit placed behind the primary house within its setbacks">
-        <rect width="440" height="360" fill="#FBFAF6"/>
-        <g stroke="#EAE4D5" stroke-width="1"><path d="M0 40H440M0 80H440M0 120H440M0 160H440M0 200H440M0 240H440M0 280H440M0 320H440M40 0V360M80 0V360M120 0V360M160 0V360M200 0V360M240 0V360M280 0V360M320 0V360M360 0V360M400 0V360"/></g>
-        <rect x="36" y="30" width="368" height="300" fill="none" stroke="#2C4A3B" stroke-width="2.4"/>
-        <text x="220" y="350" text-anchor="middle" font-family="Space Mono" font-size="12" fill="#4B584F">FRONT — PUBLIC RIGHT-OF-WAY</text>
-        <rect x="86" y="210" width="178" height="92" fill="#D9E0D2" stroke="#1F2A24" stroke-width="2"/>
-        <path d="M86 210l89-34 89 34" fill="none" stroke="#1F2A24" stroke-width="2"/>
-        <text x="175" y="262" text-anchor="middle" font-family="Space Grotesk" font-weight="600" font-size="14" fill="#1F2A24">PRIMARY HOME</text>
-        <path d="M86 210H404" stroke="#BD8A2C" stroke-width="1.5" stroke-dasharray="5 5"/>
-        <text x="398" y="203" text-anchor="end" font-family="Space Mono" font-size="10.5" fill="#BD8A2C">front façade line</text>
-        <rect x="250" y="92" width="104" height="80" fill="#2C4A3B" stroke="#1F2A24" stroke-width="2" rx="2"/>
-        <path d="M250 92l52-22 52 22" fill="#2C4A3B" stroke="#1F2A24" stroke-width="2"/>
-        <text x="302" y="138" text-anchor="middle" font-family="Space Grotesk" font-weight="700" font-size="13" fill="#FBFAF6">ADU</text>
-        <g font-family="Space Mono" font-size="10.5" fill="#4B584F">
-          <path d="M354 92V172M354 92h8M354 172h8M404 92V172" stroke="#B9B09C" stroke-width="1"/><text x="368" y="136">5'</text>
-          <path d="M250 60H354M250 56v8M354 56v8" stroke="#B9B09C" stroke-width="1"/><text x="302" y="52" text-anchor="middle">behind the home</text>
-        </g>
-      </svg>
+      <img src="assets/plans/overlook.png" width="1000" height="862" alt="The Overlook — a 1,064 sq ft pre-approved Woodstock ADU with a second-floor deck and gable roof">
+      <div class="caption">The Overlook · 1,064 sq ft</div>
     </div>
   </div>
 </section>
 
 <!-- ============ TRUST ============ -->
-<div class="trust"><div class="wrap trust-in">
+<div class="trust"><div class="wrap trust-in" data-reveal-group>
   <div class="lede">Built on the City of Woodstock<br>Pre-Approved ADU Program.</div>
-  <div class="stat"><b>5</b><span>city-vetted plans</span></div>
+  <div class="stat"><b data-count="5">5</b><span>city-vetted plans</span></div>
   <div class="stat"><b>Faster</b><span>permit review</span></div>
   <div class="stat"><b>1 price</b><span>fixed, by plan</span></div>
 </div></div>
@@ -312,13 +370,13 @@
 <!-- ============ BUILD WIZARD ============ -->
 <section id="build" class="build">
   <div class="wrap">
-    <div class="sec-head" style="text-align:center;margin-left:auto;margin-right:auto">
+    <div class="sec-head" style="text-align:center;margin-left:auto;margin-right:auto" data-reveal>
       <span class="eyebrow">Eligibility · Pricing · Reserve</span>
       <h2>Start your build in four steps.</h2>
       <p style="margin-left:auto;margin-right:auto">Check your lot against the City's live map, choose a plan that fits, see an instant estimate, and reserve your spot — without leaving this page.</p>
     </div>
 
-    <div class="wizard">
+    <div class="wizard" data-reveal>
       <div class="wz-steps">
         <div class="st active" data-step="1"><b>1</b>Address</div>
         <div class="st" data-step="2"><b>2</b>Your home</div>
@@ -417,8 +475,8 @@
 <!-- ============ WHO ============ -->
 <section id="why">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Why a backyard cottage</span><h2>Room for the people you love — on the land you already own.</h2><p>An accessory dwelling unit is a small, independent home on your lot. In Woodstock you can build one as long as you live in one of the two homes.</p></div>
-    <div class="cards3">
+    <div class="sec-head" data-reveal><span class="eyebrow">Why a backyard cottage</span><h2>Room for the people you love — on the land you already own.</h2><p>An accessory dwelling unit is a small, independent home on your lot. In Woodstock you can build one as long as you live in one of the two homes.</p></div>
+    <div class="cards3" data-reveal-group>
       <div class="card"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M17 11l2 2 4-4"/></svg><h3>Aging parents, close by</h3><p>Independence and privacy for them, peace of mind for you — steps from your back door instead of across town.</p></div>
       <div class="card"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><h3>A start for adult kids</h3><p>A real first place of their own that keeps them close while they find their feet, finish school, or save up.</p></div>
       <div class="card"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><h3>Rental income or downsizing</h3><p>Add a single rental unit on your lot, or move into the ADU and rent the main house as you plan for retirement.</p></div>
@@ -429,8 +487,8 @@
 <!-- ============ PLANS ============ -->
 <section id="plans" class="plans-sec">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">The five pre-approved designs</span><h2>Already reviewed by the City. Ready to build.</h2><p>Each plan has passed structural, architectural, and zoning review — which is what shortens your permit timeline. Larger plans need larger primary homes (an ADU can be up to 40% of your main home's floor area).</p></div>
-    <div class="plans" id="plansGrid"></div>
+    <div class="sec-head" data-reveal><span class="eyebrow">The five pre-approved designs</span><h2>Already reviewed by the City. Ready to build.</h2><p>Each plan has passed structural, architectural, and zoning review — which is what shortens your permit timeline. Larger plans need larger primary homes (an ADU can be up to 40% of your main home's floor area).</p></div>
+    <div class="plans" id="plansGrid" data-reveal-group></div>
     <p style="margin-top:22px;font-size:15px;color:var(--ink-soft)">Want different materials, windows, or layout? You can customize any plan through our design professional. <a href="#build" style="color:var(--pine);font-weight:600">Check your lot &amp; price it →</a></p>
   </div>
 </section>
@@ -438,8 +496,8 @@
 <!-- ============ HOW ============ -->
 <section id="how">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Curious to keys, in six steps</span><h2>You make two decisions. We carry the rest.</h2><p>The City's process has six steps. The middle four — paperwork, departments, inspections — are the part homeowners hire us for.</p></div>
-    <div class="steps">
+    <div class="sec-head" data-reveal><span class="eyebrow">Curious to keys, in six steps</span><h2>You make two decisions. We carry the rest.</h2><p>The City's process has six steps. The middle four — paperwork, departments, inspections — are the part homeowners hire us for.</p></div>
+    <div class="steps" data-reveal-group>
       <div class="step"><div class="n">01</div><h3>Confirm eligibility</h3><p>We verify your lot is in city limits, in an eligible zone, with room behind the house.</p><span class="tag">You + us</span></div>
       <div class="step"><div class="n">02</div><h3>Choose a plan</h3><p>Pick one of the five pre-approved designs and any customizations.</p><span class="tag">Your call</span></div>
       <div class="step"><div class="n">03</div><h3>Site plan (HLP)</h3><p>Our design professional draws the site-specific House Location Plan the City requires.</p><span class="tag">We handle it</span></div>
@@ -453,12 +511,14 @@
 <!-- ============ FAQ ============ -->
 <section id="faq" class="faq-sec">
   <div class="wrap" style="max-width:880px">
-    <div class="sec-head"><span class="eyebrow">Good questions</span><h2>The things everyone asks first.</h2></div>
+    <div class="sec-head" data-reveal><span class="eyebrow">Good questions</span><h2>The things everyone asks first.</h2></div>
+    <div class="faq-list" data-reveal-group>
     <details><summary>Can I rent out my ADU?<span class="pl">+</span></summary><div class="ans">Yes — as long as one of the two homes on the property is owner-occupied. Live in the main house and rent the ADU, or live in the ADU and rent the main house.</div></details>
     <details><summary>How long does permitting take?<span class="pl">+</span></summary><div class="ans">Because the plans are pre-approved by the City, the remaining review is shorter and more predictable than a custom ADU. We give you a timeline for your specific lot after the eligibility check.</div></details>
     <details><summary>Can I customize the plan?<span class="pl">+</span></summary><div class="ans">Yes. Modify materials, windows, and interior layouts through a licensed design professional, which we coordinate as part of the project.</div></details>
     <details><summary>What does it cost?<span class="pl">+</span></summary><div class="ans">One fixed price per plan, confirmed after a site visit. The configurator above gives an instant estimate; City permit and impact fees are itemized separately and explained up front.</div></details>
     <details><summary>Do I have to live inside Woodstock city limits?<span class="pl">+</span></summary><div class="ans">For this program, yes. A "Woodstock" mailing address isn't a guarantee — many are in unincorporated Cherokee County. Our address tool checks your jurisdiction against the City's own GIS.</div></details>
+    </div>
   </div>
 </section>
 
@@ -467,7 +527,7 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <a href="#top" class="brand"><svg class="mk" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M7 12.5h18a9 9 0 0 1-9 9 9 9 0 0 1-9-9Z" fill="#D9E0D2"/><path d="M8 12c0-2.7 3.6-4.6 8-4.6s8 1.9 8 4.6" stroke="#BD8A2C" stroke-width="2.3" stroke-linecap="round"/><path d="M16 7.4V3.6" stroke="#BD8A2C" stroke-width="2.3" stroke-linecap="round"/></svg> Woodstock<span style="color:var(--honey)">ADU</span></a>
+        <a href="#top" class="brand"><svg class="mk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4V2"/><path d="M5 10v4a7.004 7.004 0 0 0 5.277 6.787c.412.104.802.292 1.102.592L12 22l.621-.621c.3-.3.69-.488 1.102-.592A7.003 7.003 0 0 0 19 14v-4"/><path d="M12 4C8 4 4.5 6 4 8c-.243.97-.919 1.952-2 3 1.31-.082 1.972-.29 3-1 .54.92.982 1.356 2 2 1.452-.647 1.954-1.098 2.5-2 .595.995 1.151 1.427 2.5 2 1.31-.621 1.862-1.058 2.5-2 .629.977 1.162 1.423 2.5 2 1.209-.548 1.68-.967 2-2 1.032.916 1.683 1.157 3 1-1.297-1.036-1.758-2.03-2-3-.5-2-4-4-8-4Z"/></svg> Woodstock<span style="color:var(--honey)">ADU</span></a>
         <p>Turnkey, fixed-price accessory dwelling units for Woodstock homeowners. Licensed Georgia residential contractor.</p>
         <p style="margin-top:8px">GA License #________ · Insured · woodstockadu.com</p>
       </div>
@@ -485,15 +545,15 @@
    Base prices are rough placeholders; replace with your real per-plan cost.
    ========================================================================= */
 const PLANS = [
-  {id:'p631', sf:631,  cfg:'Two-story over garage · 1 bed / 1 bath', minPrimary:1578, base:188000,
+  {id:'p631', name:'The Carriage', sf:631,  cfg:'1 bed · 1 bath · living loft over a 2-car garage', minPrimary:1578, base:188000, img:'assets/plans/carriage.png',
      art:'<path d="M14 56V30l36-18 36 18v26"/><path d="M10 30l40-20 40 20"/><rect x="40" y="38" width="14" height="18"/>'},
-  {id:'p660', sf:660,  cfg:'Single story · compact footprint', minPrimary:1650, base:192000,
+  {id:'p660', name:'The Cottage', sf:660,  cfg:'1 bed · 1 bath · single-level, no garage', minPrimary:1650, base:192000, img:'assets/plans/cottage.png',
      art:'<path d="M22 56V36h56v20"/><path d="M16 36l34-14 34 14"/><rect x="44" y="42" width="14" height="14"/>'},
-  {id:'p684', sf:684,  cfg:'Single story · attached two-car garage', minPrimary:1710, base:208000,
+  {id:'p684', name:'The Bungalow', sf:684,  cfg:'1 bed · 1 bath · single-level with a 2-car garage', minPrimary:1710, base:208000, img:'assets/plans/bungalow.png',
      art:'<path d="M16 56V34h68v22"/><path d="M10 34l40-16 40 16"/><rect x="60" y="40" width="18" height="16"/>'},
-  {id:'p1032',sf:1032, cfg:'Single story · dining + kitchen', minPrimary:2580, base:266000,
+  {id:'p1032',name:'The Homestead', sf:1032, cfg:'1 bed · 1 bath · spacious single-level + 2-car garage', minPrimary:2580, base:266000, img:'assets/plans/homestead.png',
      art:'<path d="M14 56V32h72v24"/><path d="M9 32l41-15 41 15"/><rect x="22" y="40" width="16" height="16"/><rect x="62" y="40" width="16" height="16"/>'},
-  {id:'p1064',sf:1064, cfg:'Two-story over garage · exterior deck', minPrimary:2660, base:286000,
+  {id:'p1064',name:'The Overlook', sf:1064, cfg:'1 bed · 1 bath · living loft over 2-car garage + private deck', minPrimary:2660, base:286000, img:'assets/plans/overlook.png',
      art:'<path d="M12 56V28l38-16 38 16v28"/><path d="M8 28l42-18 42 18"/><rect x="58" y="40" width="20" height="16"/><path d="M14 52h20v4H14z"/>'}
 ];
 const TIERS = {essential:1.0, signature:1.12, premium:1.25};
@@ -635,7 +695,7 @@ function renderPlans2(){
   grid.innerHTML=PLANS.map(p=>{
     const fits = !maxAdu || p.sf<=maxAdu;
     return `<button type="button" class="pp ${fits?'':'unfit'}" data-plan="${p.id}" ${fits?'':'disabled'} aria-pressed="${state.plan===p.id}">
-      <div class="sf">${p.sf} sf</div><div class="cf">${p.cfg}</div>
+      <div class="sf">${p.name}</div><div class="cf">${p.sf} sq ft · ${p.cfg}</div>
       <div class="mn">${fits?'FITS YOUR LOT':'NEEDS A LARGER HOME'}</div></button>`;
   }).join('');
   grid.querySelectorAll('.pp:not(.unfit)').forEach(b=>b.onclick=()=>{
@@ -680,7 +740,7 @@ function renderSummary(){
   document.getElementById('summary').innerHTML=`
     <div class="sr"><span>Address</span><b>${state.lat?state.lat.toFixed(4)+', '+state.lng.toFixed(4):'—'}</b></div>
     <div class="sr"><span>Zoning</span><b>${state.zoning||'—'}</b></div>
-    <div class="sr"><span>Plan</span><b>${p?p.sf+' sq ft':'—'}</b></div>
+    <div class="sr"><span>Plan</span><b>${p?p.name+' · '+p.sf+' sq ft':'—'}</b></div>
     <div class="sr"><span>Finish level</span><b style="text-transform:capitalize">${state.tier}</b></div>
     <div class="sr"><span>Add-ons</span><b>${adds.length?adds.join(', '):'None'}</b></div>
     <div class="sr"><span>Estimated fixed price</span><b>${t?'$'+lo.toLocaleString()+' – $'+hi.toLocaleString():'—'}</b></div>
@@ -718,7 +778,7 @@ async function submitLead(intent){
     intent, name, email, phone,
     address: val('wzAddr') || val('heroAddr') || '',
     lat:state.lat, lng:state.lng, zoning:state.zoning, inCity:state.inCity,
-    plan: p?`${p.sf} sq ft`:'', tier:state.tier, addons:[...state.addons],
+    plan: p?`${p.name} (${p.sf} sq ft)`:'', tier:state.tier, addons:[...state.addons],
     estimate: t?Math.round(t):null, source:'woodstockadu.com'
   };
   status.className='elig-card busy show'; status.innerHTML='<span class="mono">Sending…</span>';
@@ -746,12 +806,90 @@ document.getElementById('reserveBtn').onclick=async function(){
 
 /* plans gallery */
 document.getElementById('plansGrid').innerHTML=PLANS.map(p=>`
-  <div class="plan"><div class="art"><svg viewBox="0 0 100 60" fill="none" stroke="#2C4A3B" stroke-width="2">${p.art}</svg></div>
-  <div class="pb"><div class="sf">${p.sf} sq ft</div><div class="cf">${p.cfg}</div>
+  <div class="plan"><div class="art"><img src="${p.img}" alt="${p.name} — front elevation of the ${p.sf} sq ft pre-approved Woodstock ADU" loading="lazy" width="1000"></div>
+  <div class="pb"><div class="sf">${p.name}</div><div class="cf"><b class="mono" style="color:var(--honey)">${p.sf} SQ FT</b> · ${p.cfg}</div>
   <div class="mn">MIN. PRIMARY HOME — ${p.minPrimary.toLocaleString()} SQ FT</div></div></div>`).join('');
 
 /* init */
 renderOpts(); estimate(); initMap();
+</script>
+
+<script>
+/* ===== UI enhancements — progressive, dependency-free, motion-safe.
+   Does not touch the wizard / map / lead logic above. ===== */
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Mobile nav */
+  var nav = document.getElementById('siteNav');
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  if(toggle && links){
+    var setOpen = function(open){
+      links.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+    toggle.addEventListener('click', function(){ setOpen(!links.classList.contains('open')); });
+    links.addEventListener('click', function(e){ if(e.target.closest('a')) setOpen(false); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') setOpen(false); });
+    window.addEventListener('resize', function(){ if(window.innerWidth>920) setOpen(false); });
+  }
+
+  /* Sticky-nav elevated state on scroll */
+  if(nav){
+    var onScrollNav = function(){ nav.classList.toggle('scrolled', window.scrollY > 8); };
+    onScrollNav();
+    window.addEventListener('scroll', onScrollNav, {passive:true});
+  }
+
+  /* Count-up for [data-count] */
+  function countUp(el){
+    var target = parseFloat(el.getAttribute('data-count')); if(isNaN(target)) return;
+    if(reduce){ el.textContent = target.toLocaleString(); return; }
+    var dur = 1100, start = null;
+    function tick(t){
+      if(start===null) start = t;
+      var p = Math.min((t-start)/dur, 1), eased = 1 - Math.pow(1-p, 3);
+      el.textContent = Math.round(target*eased).toLocaleString();
+      if(p<1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* Scroll reveal via IntersectionObserver */
+  var revealEls = document.querySelectorAll('[data-reveal],[data-reveal-group]');
+  if('IntersectionObserver' in window && revealEls.length){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(!en.isIntersecting) return;
+        en.target.classList.add('in');
+        if(en.target.hasAttribute('data-count')) countUp(en.target);
+        en.target.querySelectorAll('[data-count]').forEach(countUp);
+        io.unobserve(en.target);
+      });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.12});
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+    document.querySelectorAll('[data-count]').forEach(countUp);
+  }
+
+  /* Subtle hero parallax (desktop, motion allowed) */
+  if(!reduce && window.matchMedia('(min-width:881px)').matches){
+    var pEls = document.querySelectorAll('[data-parallax]');
+    if(pEls.length){
+      var ticking = false;
+      var apply = function(){
+        var y = window.scrollY;
+        pEls.forEach(function(el){ el.style.transform = 'translate3d(0,'+(y*-0.04)+'px,0)'; });
+        ticking = false;
+      };
+      window.addEventListener('scroll', function(){ if(!ticking){ requestAnimationFrame(apply); ticking = true; } }, {passive:true});
+      apply();
+    }
+  }
+})();
 </script>
 </body>
 </html>
