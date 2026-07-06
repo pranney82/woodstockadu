@@ -6,14 +6,20 @@ backend running on **Cloudflare Pages Functions + D1**.
 
 ```
 .
-├── index.html              # the site (single file)
-├── robots.txt
-├── sitemap.xml
+├── public/                 # everything publicly served (build output dir)
+│   ├── index.html          # homepage: wizard, map, pricing, lead form
+│   ├── cost.html           # /cost — pricing guide
+│   ├── rules.html          # /rules — zoning guide
+│   ├── 404.html            # real 404s (no SPA soft-404 fallback)
+│   ├── plans/              # /plans/ hub + 5 plan pages
+│   ├── assets/             # site.css, site.js, plan images/PDFs
+│   ├── robots.txt / sitemap.xml / favicon.svg / icons / og-image.jpg
+│   └── site.webmanifest
 ├── functions/
 │   └── api/
 │       └── lead.js         # POST /api/lead  → stores lead in D1, emails via Resend
-├── schema.sql              # D1 table definition
-├── wrangler.toml           # Cloudflare config (D1 binding, vars)
+├── schema.sql              # D1 table definition (NOT publicly served)
+├── wrangler.toml           # Cloudflare config (D1 binding, vars; NOT served)
 └── .gitignore
 ```
 
@@ -31,9 +37,9 @@ git push -u origin main
 ## 2. Connect Cloudflare Pages
 
 1. Cloudflare dashboard → **Workers & Pages → Create → Pages → Connect to Git**.
-2. Pick the repo. Build settings: **Framework preset: None**, **Build command: (empty)**,
-   **Build output directory: `/`** (the site is static; Functions are auto-detected
-   from the `functions/` folder).
+2. Pick the repo. Build settings: **Framework preset: None**, **Build command: (empty)**.
+   The build output directory comes from `wrangler.toml` (`pages_build_output_dir = "public"`);
+   Functions are auto-detected from the `functions/` folder.
 3. Deploy. Then add your custom domain **woodstockadu.com** under the project's
    **Custom domains** tab (Cloudflare will guide DNS since the domain is on Cloudflare).
 
@@ -80,7 +86,7 @@ Lead storage works without this. To also get an email per lead:
 ## 5. Local development
 
 ```bash
-wrangler pages dev .
+wrangler pages dev
 ```
 
 Runs the site and `/api/lead` locally. Put local secrets in a `.dev.vars` file
@@ -88,15 +94,24 @@ Runs the site and `/api/lead` locally. Put local secrets in a `.dev.vars` file
 
 ---
 
-## Things still to wire before launch
+## Things still to wire before launch (owner action needed)
 
-- **Stripe deposit** — in `index.html`, set `data-stripe` on `#reserveBtn` to a real
-  Stripe Payment Link for the $1,000 refundable deposit.
-- **Real pricing** — replace the placeholder `base` prices in the `PLANS` array near
-  the bottom of `index.html` with your true per-plan costs.
-- **NAP + license #** — update phone, email, address, and GA license number in the
-  footer and the JSON-LD `<script>` blocks (consistent name/address/phone helps local SEO).
-- **og-image.jpg** — add a 1200×630 share image at the site root.
+- **Stripe deposit** — in `public/index.html`, set `data-stripe` on `#reserveBtn` to a
+  real Stripe Payment Link. Until then the reserve flow honestly says "we'll email you
+  a payment link" instead of promising a checkout redirect.
+- **Real pricing** — confirm the `base` prices in the `PLANS` array in `public/index.html`
+  (also published on /cost and the plan pages' Product schema).
+- **LEAD_TO** — `wrangler.toml` still points lead notifications at a placeholder inbox;
+  set a real address and the `RESEND_API_KEY` secret.
+- **Turnstile** — add the widget site key on the form and set the `TURNSTILE_SECRET`
+  secret; `/api/lead` starts enforcing it automatically once the secret exists.
+- **Real NAP + GA license #** — footer and JSON-LD now deliberately omit phone/street
+  address/license number (placeholders were worse than nothing). Add real ones
+  everywhere at once when available.
+- **www subdomain** — `www.woodstockadu.com` 522s; add it as a custom domain (or
+  redirect) in the Pages project.
+- **Cloudflare Web Analytics** — beacon tags were removed (they carried a placeholder
+  token); enable Automatic Setup in the CF dashboard or re-add tags with a real token.
 - **Geocoder** — the site uses free OpenStreetMap geocoding (good for launch). For higher
   traffic, swap the `geocode()` function to Mapbox/Google and add the key.
 

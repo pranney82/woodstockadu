@@ -4,7 +4,9 @@
 
 name = "woodstockadu"
 compatibility_date = "2026-06-01"
-pages_build_output_dir = "."
+# Site files live in public/ so repo config (this file, schema.sql, package.json…)
+# is not publicly served. Pages Functions stay in /functions at the repo root.
+pages_build_output_dir = "public"
 
 # D1 database binding (used by functions/api/lead.js as env.DB)
 [[d1_databases]]
@@ -16,5 +18,8 @@ database_id = "3c71e7c4-a0ab-4ce6-85e8-3d803d924c32"
 # Set RESEND_API_KEY as a SECRET, not here:
 #   npx wrangler pages secret put RESEND_API_KEY
 [vars]
+# TODO(owner): LEAD_TO is a PLACEHOLDER — lead notification emails go nowhere
+# until this is a real inbox. Also set the RESEND_API_KEY secret to enable email,
+# and TURNSTILE_SECRET to turn on captcha verification in /api/lead.
 LEAD_TO = "you@woodstockadu.com"
 LEAD_FROM = "leads@woodstockadu.com"

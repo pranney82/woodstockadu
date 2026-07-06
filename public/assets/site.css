@@ -125,7 +125,7 @@ table.t a{font-weight:600}
 .hubcard .pic{background:#fff;border-bottom:1px solid var(--line);aspect-ratio:16/11;display:flex;align-items:center;justify-content:center;padding:14px}
 .hubcard .pic img{width:100%;height:100%;object-fit:contain}
 .hubcard .body{padding:18px 20px 22px}
-.hubcard h3{font-size:21px;font-weight:700}
+.hubcard h2,.hubcard h3{font-size:21px;font-weight:700}
 .hubcard .cf{font-size:14px;color:var(--ink-soft);margin:5px 0 12px;min-height:42px}
 .hubcard .row{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:12px}
 .hubcard .row b{font-family:"Space Grotesk";color:var(--pine);font-size:18px}

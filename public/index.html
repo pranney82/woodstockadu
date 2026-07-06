@@ -8,15 +8,14 @@
 
 <!-- ============================ SEO ============================ -->
 <title>Woodstock ADU | Pre-Approved Accessory Dwelling Units in Woodstock, GA</title>
-<meta name="description" content="Turnkey, fixed-price accessory dwelling units in Woodstock, GA. Check your lot's eligibility by address, see instant pricing, and reserve your build — all online. Built on the City of Woodstock Pre-Approved ADU Program.">
+<meta name="description" content="Turnkey, fixed-price ADUs in Woodstock, GA. Check your lot's eligibility by address, see instant pricing, and reserve your build — all online.">
 <link rel="canonical" href="https://woodstockadu.com/">
 <meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="keywords" content="Woodstock ADU, accessory dwelling unit Woodstock GA, pre-approved ADU plans, backyard cottage Woodstock, in-law suite, granny flat Woodstock, ADU builder Cherokee County">
 <meta name="theme-color" content="#2C4A3B">
 
 <!-- Icons / PWA -->
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 
 <!-- Open Graph -->
@@ -51,10 +50,10 @@
   "image":"https://woodstockadu.com/og-image.jpg",
   "@id":"https://woodstockadu.com/#business",
   "url":"https://woodstockadu.com/",
-  "telephone":"+1-770-000-0000",
+  "email":"hello@woodstockadu.com",
   "priceRange":"$$$",
   "description":"Turnkey, fixed-price accessory dwelling unit (ADU) construction for homeowners inside the City of Woodstock, Georgia, built on the City's Pre-Approved ADU Program.",
-  "address":{"@type":"PostalAddress","streetAddress":"Your street address","addressLocality":"Woodstock","addressRegion":"GA","postalCode":"30188","addressCountry":"US"},
+  "address":{"@type":"PostalAddress","addressLocality":"Woodstock","addressRegion":"GA","postalCode":"30188","addressCountry":"US"},
   "geo":{"@type":"GeoCoordinates","latitude":34.1015,"longitude":-84.5194},
   "areaServed":{"@type":"City","name":"Woodstock, Georgia"},
   "knowsAbout":["Accessory Dwelling Units","ADU construction","Pre-approved ADU plans","Backyard cottages","In-law suites"],
@@ -79,7 +78,7 @@
   :root{
     /* Light "architect's paper" palette — used inside the wizard / interactive tool */
     --paper:#F4EFE3; --paper2:#ECE5D6; --panel:#E6DECB; --ink:#1C2620; --ink-soft:#55635A;
-    --pine:#2C4A3B; --pine-deep:#1E3328; --honey:#C28E2E; --honey-soft:#E7D3A3;
+    --pine:#2C4A3B; --pine-deep:#1E3328; --honey:#C28E2E; --honey-soft:#E7D3A3; --honey-ink:#8F6614;
     --line:#D2C9B4; --sage:#DCE3D6; --white:#FCFBF7; --go:#3C7A57;
     /* Dark cinematic frame — the rest of the page */
     --night:#0B1510; --night-2:#0F1B15; --night-3:#14241B;
@@ -214,7 +213,7 @@
   .badge{font-family:"Space Mono";font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding:3px 9px;border-radius:6px;background:var(--white);border:1px solid var(--line)}
 
   .field{margin-bottom:18px}
-  .field label{display:block;font-weight:600;font-size:15px;margin-bottom:8px;color:var(--ink)}
+  .field label,.field .lbl-hd{display:block;font-weight:600;font-size:15px;margin-bottom:8px;color:var(--ink)}
   .field input,.field select{width:100%;font-family:inherit;font-size:16px;padding:13px 15px;border:1.6px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);transition:border-color .2s,box-shadow .2s}
   .field input:focus{border-color:var(--pine);box-shadow:0 0 0 3px rgba(44,74,59,.12);outline:none}
   .help{font-size:13.5px;color:var(--ink-soft);margin-top:7px}
@@ -321,7 +320,7 @@
   .pm-thumb[aria-pressed="true"]{border-color:var(--pine);box-shadow:0 8px 20px -12px rgba(44,74,59,.6)}
   .pm-thumb.soon{cursor:default;display:flex;align-items:center;justify-content:center;text-align:center;font-family:"Space Mono";font-size:9px;line-height:1.35;letter-spacing:.03em;color:var(--ink-soft);padding:6px;background:var(--paper)}
   .pm-info{padding:30px 30px 28px;display:flex;flex-direction:column}
-  .pm-sub{font-family:"Space Mono";font-size:11.5px;color:var(--honey);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+  .pm-sub{font-family:"Space Mono";font-size:11.5px;color:var(--honey-ink);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
   .pm-info h3{font-size:27px;font-weight:700;margin:0 0 14px}
   .pm-specs{margin:0 0 16px}
   .pm-specs .r{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:15px}
@@ -336,7 +335,7 @@
   .steps{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--white)}
   .step{padding:30px 28px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transition:background .25s}
   .step:hover{background:var(--paper)}
-  .step .n{font-family:"Space Mono";font-weight:700;color:var(--honey);font-size:14px}
+  .step .n{font-family:"Space Mono";font-weight:700;color:var(--honey-ink);font-size:14px}
   .step h3{font-size:19px;font-weight:600;margin:8px 0 6px;color:var(--ink)}.step p{font-size:15px;color:var(--ink-soft)}
   .step .tag{margin-top:12px;display:inline-block;font-family:"Space Mono";font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--pine);background:var(--sage);padding:4px 9px;border-radius:6px}
   @media(max-width:820px){.steps{grid-template-columns:1fr}.step{border-right:0}}
@@ -498,7 +497,7 @@
           <h3>Is your lot eligible?</h3>
           <p class="sub">We check your address against the City of Woodstock's official city-limits and zoning layers in real time.</p>
           <div class="addr-row">
-            <input id="wzAddr" type="text" placeholder="123 Main St, Woodstock, GA 30188" autocomplete="street-address" enterkeyhint="search" autocapitalize="words" autocorrect="off">
+            <input id="wzAddr" type="text" placeholder="123 Main St, Woodstock, GA 30188" autocomplete="street-address" enterkeyhint="search" autocapitalize="words" autocorrect="off" aria-label="Property address">
             <button class="btn btn-primary" id="wzCheck">Check</button>
           </div>
           <div id="map"></div>
@@ -531,16 +530,16 @@
           <h3>Design your cottage.</h3>
           <p class="sub">Pick a finish level and any add-ons. Your estimate updates instantly.</p>
           <div class="field">
-            <label>Finish level</label>
-            <div class="tiers" id="tiers">
+            <span class="lbl-hd" id="tiersLbl">Finish level</span>
+            <div class="tiers" id="tiers" role="group" aria-labelledby="tiersLbl">
               <button type="button" class="tier" data-tier="essential" aria-pressed="true"><b>Essential</b><span>Clean, durable, move-in ready</span></button>
               <button type="button" class="tier" data-tier="signature" aria-pressed="false"><b>Signature</b><span>Upgraded finishes &amp; fixtures</span></button>
               <button type="button" class="tier" data-tier="premium" aria-pressed="false"><b>Premium</b><span>Top-tier, designer-grade</span></button>
             </div>
           </div>
           <div class="field">
-            <label>Add-ons</label>
-            <div class="opt-grid" id="opts"></div>
+            <span class="lbl-hd" id="optsLbl">Add-ons</span>
+            <div class="opt-grid" id="opts" role="group" aria-labelledby="optsLbl"></div>
           </div>
           <div class="estimate">
             <div class="lbl">Estimated fixed price</div>
@@ -595,7 +594,7 @@
 <!-- ============ PLANS ============ -->
 <section id="plans" class="plans-sec">
   <div class="wrap">
-    <div class="sec-head" data-reveal><span class="eyebrow">The five pre-approved designs</span><h2>Already reviewed by the City. Ready to build.</h2><p>Each plan has passed structural, architectural, and zoning review — which is what shortens your permit timeline. Larger plans need larger primary homes (an ADU can be up to 40% of your main home's floor area).</p></div>
+    <div class="sec-head" data-reveal><span class="eyebrow">The five pre-approved designs</span><h2>Already reviewed by the City. Ready to build.</h2><p>Each plan has passed structural, architectural, and zoning review — which is what shortens your permit timeline. An ADU can be up to 40% of your main home's floor area or 850 sq ft, whichever is greater — so the three smaller plans fit any home, and only the two largest need a bigger main house.</p></div>
     <div class="plans" id="plansGrid" data-reveal-group></div>
     <p style="margin-top:22px;font-size:15px;color:var(--ink-soft)">Want different materials, windows, or layout? You can customize any plan through our design professional. <a href="/plans/" style="color:var(--pine);font-weight:600">Compare all five plans in detail →</a> · <a href="#build" style="color:var(--pine);font-weight:600">Check your lot &amp; price it →</a></p>
   </div>
@@ -637,10 +636,10 @@
       <div>
         <a href="#top" class="brand"><svg class="mk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4V2"/><path d="M5 10v4a7.004 7.004 0 0 0 5.277 6.787c.412.104.802.292 1.102.592L12 22l.621-.621c.3-.3.69-.488 1.102-.592A7.003 7.003 0 0 0 19 14v-4"/><path d="M12 4C8 4 4.5 6 4 8c-.243.97-.919 1.952-2 3 1.31-.082 1.972-.29 3-1 .54.92.982 1.356 2 2 1.452-.647 1.954-1.098 2.5-2 .595.995 1.151 1.427 2.5 2 1.31-.621 1.862-1.058 2.5-2 .629.977 1.162 1.423 2.5 2 1.209-.548 1.68-.967 2-2 1.032.916 1.683 1.157 3 1-1.297-1.036-1.758-2.03-2-3-.5-2-4-4-8-4Z"/></svg> Woodstock<span style="color:var(--honey)">ADU</span></a>
         <p>Turnkey, fixed-price accessory dwelling units for Woodstock homeowners. Licensed Georgia residential contractor.</p>
-        <p style="margin-top:8px">GA License #________ · Insured · woodstockadu.com</p>
+        <p style="margin-top:8px">Insured · woodstockadu.com</p>
       </div>
       <div class="foot-col"><h4>Explore</h4><p><a href="/plans/">The five plans</a><br><a href="/cost">ADU cost guide</a><br><a href="/rules">Rules &amp; zoning</a><br><a href="#how">How it works</a><br><a href="#faq">FAQ</a></p></div>
-      <div class="foot-col"><h4>Get started</h4><p><a href="#build">Check your address</a><br><a href="mailto:hello@woodstockadu.com">hello@woodstockadu.com</a><br>(770) 000-0000<br>Woodstock, GA 30188</p></div>
+      <div class="foot-col"><h4>Get started</h4><p><a href="#build">Check your address</a><br><a href="mailto:hello@woodstockadu.com">hello@woodstockadu.com</a><br>Woodstock, GA 30188</p></div>
     </div>
     <p class="disclaimer">Woodstock ADU is an independent, privately owned contractor. We are not affiliated with, endorsed by, or an official agent of the City of Woodstock. References to the City's Pre-Approved ADU Program describe a public program available to eligible residents. The eligibility tool queries public City of Woodstock GIS data for guidance only and is not a substitute for an official zoning determination; eligibility, plan availability, fees, and requirements are set by the City and subject to change. Pricing shown is an illustrative estimate, not a quote. We confirm current details and provide a guaranteed fixed price after an on-site assessment.</p>
   </div>
@@ -685,11 +684,11 @@
    Base prices are rough placeholders; replace with your real per-plan cost.
    ========================================================================= */
 const PLANS = [
-  {id:'p631', name:'The Carriage', sf:631,  cfg:'1 bed · 1 bath · living loft over a 2-car garage', minPrimary:1578, base:188000, img:'assets/plans/carriage.png', floor:'assets/plans/carriage-floor.png', pdf:'assets/plans/carriage.pdf',
+  {id:'p631', name:'The Carriage', sf:631,  cfg:'1 bed · 1 bath · living loft over a 2-car garage', minPrimary:0, base:188000, img:'assets/plans/carriage.png', floor:'assets/plans/carriage-floor.png', pdf:'assets/plans/carriage.pdf',
      art:'<path d="M14 56V30l36-18 36 18v26"/><path d="M10 30l40-20 40 20"/><rect x="40" y="38" width="14" height="18"/>'},
-  {id:'p660', name:'The Cottage', sf:660,  cfg:'1 bed · 1 bath · single-level, no garage', minPrimary:1650, base:192000, img:'assets/plans/cottage.png', floor:'assets/plans/cottage-floor.png', pdf:'assets/plans/cottage.pdf',
+  {id:'p660', name:'The Cottage', sf:660,  cfg:'1 bed · 1 bath · single-level, no garage', minPrimary:0, base:192000, img:'assets/plans/cottage.png', floor:'assets/plans/cottage-floor.png', pdf:'assets/plans/cottage.pdf',
      art:'<path d="M22 56V36h56v20"/><path d="M16 36l34-14 34 14"/><rect x="44" y="42" width="14" height="14"/>'},
-  {id:'p684', name:'The Bungalow', sf:684,  cfg:'1 bed · 1 bath · single-level with a 2-car garage', minPrimary:1710, base:208000, img:'assets/plans/bungalow.png', floor:'assets/plans/bungalow-floor.png', pdf:'assets/plans/bungalow.pdf',
+  {id:'p684', name:'The Bungalow', sf:684,  cfg:'1 bed · 1 bath · single-level with a 2-car garage', minPrimary:0, base:208000, img:'assets/plans/bungalow.png', floor:'assets/plans/bungalow-floor.png', pdf:'assets/plans/bungalow.pdf',
      art:'<path d="M16 56V34h68v22"/><path d="M10 34l40-16 40 16"/><rect x="60" y="40" width="18" height="16"/>'},
   {id:'p1032',name:'The Homestead', sf:1032, cfg:'1 bed · 1 bath · spacious single-level + 2-car garage', minPrimary:2580, base:266000, img:'assets/plans/homestead.png', floor:'assets/plans/homestead-floor.png', pdf:'assets/plans/homestead.pdf',
      art:'<path d="M14 56V32h72v24"/><path d="M9 32l41-15 41 15"/><rect x="22" y="40" width="16" height="16"/><rect x="62" y="40" width="16" height="16"/>'},
@@ -719,6 +718,13 @@ const state = {lat:null,lng:null,eligible:false,zoning:null,inCity:false,plan:nu
 /* ---------- Map ---------- */
 let map, marker;
 function initMap(){
+  // If the Leaflet CDN failed, hide the map but keep the address check working —
+  // eligibility only needs lat/lng, not the map.
+  if(typeof L==='undefined'){
+    const el=document.getElementById('map');
+    if(el) el.style.display='none';
+    return;
+  }
   map = L.map('map',{scrollWheelZoom:false}).setView([34.1015,-84.5194],13);
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
     attribution:'&copy; OpenStreetMap &copy; CARTO', maxZoom:19
@@ -727,11 +733,13 @@ function initMap(){
 }
 function setPin(lat,lng,run){
   state.lat=lat; state.lng=lng;
-  if(!marker){
-    marker = L.marker([lat,lng],{draggable:true}).addTo(map);
-    marker.on('dragend', ()=>{const p=marker.getLatLng(); state.lat=p.lat; state.lng=p.lng; resolvePinAddress(); runEligibility();});
-  } else marker.setLatLng([lat,lng]);
-  map.setView([lat,lng],17);
+  if(map){
+    if(!marker){
+      marker = L.marker([lat,lng],{draggable:true}).addTo(map);
+      marker.on('dragend', ()=>{const p=marker.getLatLng(); state.lat=p.lat; state.lng=p.lng; resolvePinAddress(); runEligibility();});
+    } else marker.setLatLng([lat,lng]);
+    map.setView([lat,lng],17);
+  }
   resolvePinAddress();
   if(run) runEligibility();
 }
@@ -776,7 +784,9 @@ async function gisPoint(endpoint,outFields){
 const card = document.getElementById('eligCard');
 const to2 = document.getElementById('to2');
 
+let eligSeq=0;
 async function runEligibility(){
+  const seq=++eligSeq;
   card.className='elig-card busy show';
   card.innerHTML='<div class="elig-row mono">Checking the City of Woodstock map…</div>';
   to2.disabled=true; state.eligible=false;
@@ -785,6 +795,7 @@ async function runEligibility(){
       gisPoint(GIS.cityLimits,'OBJECTID'),
       gisPoint(GIS.zoning,'ZONING,Description')
     ]);
+    if(seq!==eligSeq) return;           // a newer check superseded this one
     const inCity = cityF.length>0; state.inCity=inCity;
     // derive district label(s)
     let labels=[], display='—';
@@ -819,6 +830,7 @@ async function runEligibility(){
       to2.disabled=true;
     }
   }catch(err){
+    if(seq!==eligSeq) return;
     card.className='elig-card no show';
     card.innerHTML='<div class="elig-row">We couldn\'t reach the City map just now. Drag the pin onto your home and try again, or <a href="#contact" style="color:var(--pine);font-weight:600">contact us</a> and we\'ll check it for you.</div>';
   }
@@ -827,7 +839,13 @@ async function runEligibility(){
 async function doAddress(addr){
   if(!addr || !addr.trim()) return;
   card.className='elig-card busy show'; card.innerHTML='<div class="elig-row mono">Locating your address…</div>';
-  const g=await geocode(addr);
+  let g=null;
+  try{ g=await geocode(addr); }
+  catch(e){
+    card.className='elig-card no show';
+    card.innerHTML='<div class="elig-row">We couldn\'t look up that address just now — try again in a moment, or click your lot on the map.</div>';
+    return;
+  }
   if(!g){card.className='elig-card no show';card.innerHTML='<div class="elig-row">We couldn\'t find that address. Try adding the ZIP, or click your lot on the map.</div>';return;}
   setPin(g.lat,g.lng,true);
 }
@@ -861,7 +879,7 @@ function renderPlans2(){
   const grid=document.getElementById('planPick');
   grid.innerHTML=PLANS.map(p=>{
     const fits = !maxAdu || p.sf<=maxAdu;
-    const tip = fits ? '' : ` title="The ${p.name} is ${p.sf} sq ft. Under Woodstock's 40% rule, an ADU can be at most 40% of your primary home — so this plan needs a home of at least ${p.minPrimary.toLocaleString()} sq ft. You entered ${sf.toLocaleString()} sq ft."`;
+    const tip = fits ? '' : ` title="The ${p.name} is ${p.sf} sq ft. An ADU over 850 sq ft can be at most 40% of your primary home's floor area — so this plan needs a home of at least ${p.minPrimary.toLocaleString()} sq ft. You entered ${sf.toLocaleString()} sq ft."`;
     return `<div class="pp-wrap"${tip}>
       <button type="button" class="pp ${fits?'':'unfit'}" data-plan="${p.id}" ${fits?'':'disabled'} aria-pressed="${state.plan===p.id}">
         <div class="pp-art"><img src="${p.img}" alt="${p.name} front elevation" loading="lazy"></div>
@@ -878,9 +896,15 @@ function renderPlans2(){
     document.getElementById('to3').disabled=false;
   });
   grid.querySelectorAll('.pp-view').forEach(b=>b.onclick=()=>openPlan(b.dataset.view));
-  // a plan preselected from the gallery's "Price this plan" CTA enables Continue
+  // a plan preselected from the gallery's "Price this plan" CTA enables Continue —
+  // but if the entered home size makes that plan unfit, drop it and re-disable.
   const cur = state.plan && PLANS.find(x=>x.id===state.plan);
-  if(cur && (!maxAdu || cur.sf<=maxAdu)) document.getElementById('to3').disabled=false;
+  if(cur && (!maxAdu || cur.sf<=maxAdu)){
+    document.getElementById('to3').disabled=false;
+  } else {
+    if(cur) state.plan=null;
+    document.getElementById('to3').disabled=true;
+  }
 }
 document.getElementById('primarySf').addEventListener('input',renderPlans2);
 
@@ -915,8 +939,8 @@ function renderSummary(){
   const t=priceOf(); const lo=t?Math.round(t*0.94/1000)*1000:0, hi=t?Math.round(t*1.06/1000)*1000:0;
   const adds=[...state.addons].map(id=>ADDONS.find(a=>a.id===id).label);
   document.getElementById('summary').innerHTML=`
-    <div class="sr"><span>Address</span><b>${state.address || (state.lat?state.lat.toFixed(4)+', '+state.lng.toFixed(4):'—')}</b></div>
-    <div class="sr"><span>Zoning</span><b>${state.zoning||'—'}</b></div>
+    <div class="sr"><span>Address</span><b>${esc(state.address || (state.lat?state.lat.toFixed(4)+', '+state.lng.toFixed(4):'—'))}</b></div>
+    <div class="sr"><span>Zoning</span><b>${esc(state.zoning||'—')}</b></div>
     <div class="sr"><span>Plan</span><b>${p?p.name+' · '+p.sf+' sq ft':'—'}</b></div>
     <div class="sr"><span>Finish level</span><b style="text-transform:capitalize">${state.tier}</b></div>
     <div class="sr"><span>Add-ons</span><b>${adds.length?adds.join(', '):'None'}</b></div>
@@ -936,11 +960,12 @@ document.getElementById('heroForm').addEventListener('submit',e=>{
 });
 document.getElementById('to2').onclick=()=>gotoStep(2);
 document.getElementById('to3').onclick=()=>gotoStep(3);
-document.getElementById('to4').onclick=()=>{if(!state.plan){alert('Pick a plan first.');return;}gotoStep(4);};
+document.getElementById('to4').onclick=()=>{if(!state.plan){gotoStep(2);return;}gotoStep(4);};
 document.querySelectorAll('[data-back]').forEach(b=>b.onclick=()=>gotoStep(+b.dataset.back));
 /* ---------- Lead capture (posts to Cloudflare Pages Function /api/lead) ---------- */
 const LEAD_ENDPOINT='/api/lead';
 const val=id=>(document.getElementById(id)?.value||'').trim();
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 async function submitLead(intent){
   const status=document.getElementById('leadStatus');
   if(val('company')) return {ok:false};            // honeypot tripped → silently drop
@@ -962,10 +987,14 @@ async function submitLead(intent){
   try{
     const r=await fetch(LEAD_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
     if(!r.ok) throw new Error('bad status');
+    const stripeLink=document.getElementById('reserveBtn')?.dataset.stripe||'';
+    const hasCheckout=stripeLink && !stripeLink.includes('your-payment-link');
     status.className='elig-card go show';
     status.innerHTML= intent==='reserve'
-      ? 'Got it — taking you to secure checkout…'
-      : `Thanks, ${name.split(' ')[0]}. We'll confirm your free assessment within one business day.`;
+      ? (hasCheckout
+          ? 'Got it — taking you to secure checkout…'
+          : `Reservation requested, ${esc(name.split(' ')[0])} — we'll email you a secure payment link within one business day to complete your refundable deposit.`)
+      : `Thanks, ${esc(name.split(' ')[0])}. We'll confirm your free assessment within one business day.`;
     return {ok:true};
   }catch(e){
     status.className='elig-card no show';
@@ -984,9 +1013,9 @@ document.getElementById('reserveBtn').onclick=async function(){
 /* plans gallery — each card opens a detail modal */
 document.getElementById('plansGrid').innerHTML=PLANS.map(p=>`
   <button type="button" class="plan" data-plan="${p.id}" aria-haspopup="dialog">
-    <div class="art"><picture><source type="image/webp" srcset="${p.img.replace(/\.png$/,'.webp')}"><img src="${p.img}" alt="${p.name} — front elevation of the ${p.sf} sq ft pre-approved Woodstock ADU" loading="lazy" decoding="async" width="1000"></picture></div>
-    <div class="pb"><div class="sf">${p.name}</div><div class="cf"><b class="mono" style="color:var(--honey)">${p.sf} SQ FT</b> · ${p.cfg}</div>
-    <div class="mn">MIN. PRIMARY HOME — ${p.minPrimary.toLocaleString()} SQ FT</div>
+    <div class="art"><picture><source type="image/webp" srcset="${p.img.replace(/\.png$/,'.webp')}"><img src="${p.img}" alt="${p.name} — front elevation of the ${p.sf} sq ft pre-approved Woodstock ADU" loading="lazy" decoding="async" width="1000" height="750"></picture></div>
+    <div class="pb"><div class="sf">${p.name}</div><div class="cf"><b class="mono" style="color:var(--honey-ink)">${p.sf} SQ FT</b> · ${p.cfg}</div>
+    <div class="mn">${p.minPrimary?`MIN. PRIMARY HOME — ${p.minPrimary.toLocaleString()} SQ FT`:'FITS ANY SIZE HOME'}</div>
     <div class="vw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>View plans &amp; specs →</div>
   </button>`).join('');
 document.querySelectorAll('#plansGrid .plan').forEach(b=>b.addEventListener('click',()=>openPlan(b.dataset.plan)));
@@ -1044,7 +1073,7 @@ async function openPlan(id){
   document.getElementById('pmSpecs').innerHTML=
      `<div class="r"><span>Size</span><b>${p.sf.toLocaleString()} sq ft</b></div>`
     +`<div class="r"><span>Layout</span><b>${p.cfg}</b></div>`
-    +`<div class="r"><span>Min. primary home</span><b>${p.minPrimary.toLocaleString()} sq ft</b></div>`;
+    +`<div class="r"><span>Min. primary home</span><b>${p.minPrimary?p.minPrimary.toLocaleString()+' sq ft':'None — fits any home'}</b></div>`;
   pmThumbs.innerHTML='';
   const tEl=pmImgThumb(p,p.img,'Front elevation',true);
   pmThumbs.append(tEl);
@@ -1192,8 +1221,5 @@ renderOpts(); estimate(); initMap();
   }
 })();
 </script>
-<!-- Cloudflare Web Analytics: paste your token from CF dashboard → your Pages project → Web Analytics.
-     (Or enable "Automatic Setup" in Cloudflare and delete this tag.) -->
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "REPLACE_WITH_CF_WEB_ANALYTICS_TOKEN"}'></script>
 </body>
 </html>
