@@ -1,8 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://woodstockadu.com/</loc>
+    <lastmod>2026-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://woodstockadu.com/og-image.jpg</image:loc>
+      <image:title>Pre-approved accessory dwelling units (ADUs) in Woodstock, GA</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://woodstockadu.com/cost</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://woodstockadu.com/rules</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://woodstockadu.com/plans/</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://woodstockadu.com/plans/carriage</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://woodstockadu.com/assets/plans/carriage.png</image:loc><image:title>The Carriage — 631 sq ft pre-approved Woodstock ADU</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://woodstockadu.com/plans/cottage</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://woodstockadu.com/assets/plans/cottage.png</image:loc><image:title>The Cottage — 660 sq ft pre-approved Woodstock ADU</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://woodstockadu.com/plans/bungalow</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://woodstockadu.com/assets/plans/bungalow.png</image:loc><image:title>The Bungalow — 684 sq ft pre-approved Woodstock ADU</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://woodstockadu.com/plans/homestead</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://woodstockadu.com/assets/plans/homestead.png</image:loc><image:title>The Homestead — 1,032 sq ft pre-approved Woodstock ADU</image:title></image:image>
+  </url>
+  <url>
+    <loc>https://woodstockadu.com/plans/overlook</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://woodstockadu.com/assets/plans/overlook.png</image:loc><image:title>The Overlook — 1,064 sq ft pre-approved Woodstock ADU</image:title></image:image>
   </url>
 </urlset>

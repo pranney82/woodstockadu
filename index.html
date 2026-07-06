@@ -14,6 +14,11 @@
 <meta name="keywords" content="Woodstock ADU, accessory dwelling unit Woodstock GA, pre-approved ADU plans, backyard cottage Woodstock, in-law suite, granny flat Woodstock, ADU builder Cherokee County">
 <meta name="theme-color" content="#2C4A3B">
 
+<!-- Icons / PWA -->
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="manifest" href="/site.webmanifest">
+
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Woodstock ADU">
@@ -21,12 +26,16 @@
 <meta property="og:description" content="Check your lot's eligibility by address, see instant pricing, and reserve your backyard cottage online. Fixed price. Permits handled.">
 <meta property="og:url" content="https://woodstockadu.com/">
 <meta property="og:image" content="https://woodstockadu.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Overlook — a pre-approved Woodstock, GA accessory dwelling unit (ADU).">
 <meta property="og:locale" content="en_US">
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Woodstock ADU | Pre-Approved Accessory Dwelling Units">
 <meta name="twitter:description" content="Check eligibility by address, see instant pricing, reserve online. Fixed price, permits handled.">
 <meta name="twitter:image" content="https://woodstockadu.com/og-image.jpg">
+<meta name="twitter:image:alt" content="The Overlook — a pre-approved Woodstock, GA accessory dwelling unit (ADU).">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -92,6 +101,7 @@
   .mono{font-family:"Space Mono",monospace}
   a{color:inherit}
   img{max-width:100%}
+  picture{display:contents}
   ::selection{background:var(--honey-soft);color:var(--pine-deep)}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 max(28px,env(safe-area-inset-right)) 0 max(28px,env(safe-area-inset-left));position:relative}
   .eyebrow{font-family:"Space Mono",monospace;font-size:12.5px;text-transform:uppercase;letter-spacing:0.24em;color:var(--pine);display:inline-flex;align-items:center;gap:10px}
@@ -216,8 +226,12 @@
   .pp .sf{font-family:"Space Grotesk";font-weight:700;font-size:19px}
   .pp .cf{font-size:12.5px;color:var(--ink-soft);margin:3px 0 8px;min-height:32px}
   .pp .mn{font-family:"Space Mono";font-size:10.5px;color:var(--pine)}
-  .pp.unfit{opacity:.5;cursor:not-allowed}
+  .pp.unfit{opacity:.6;cursor:not-allowed}
+  .pp-why{font-size:11.5px;line-height:1.35;color:var(--ink-soft);background:#F1E7D6;border:1px solid var(--honey-soft);border-radius:9px;padding:7px 10px}
+  .pp-why b{color:var(--ink);font-weight:600}
   .pp.unfit:hover{transform:none;box-shadow:none}
+  .pp-art{background:#fff;border:1px solid var(--line);border-radius:9px;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:10px}
+  .pp-art img{display:block;width:100%;height:100%;object-fit:contain;padding:5px}
   .pp-wrap{display:flex;flex-direction:column;gap:8px}
   .pp-wrap .pp{flex:1}
   .pp-view{font-family:"Space Grotesk";font-weight:600;font-size:12.5px;color:var(--pine);background:transparent;border:1px dashed var(--line);border-radius:10px;padding:8px 10px;cursor:pointer;transition:border-color .15s,background .15s}
@@ -235,7 +249,8 @@
   .tier span{font-size:13px;color:var(--ink-soft)}
   @media(max-width:620px){.opt-grid,.tiers{grid-template-columns:1fr}.wz-body{padding:26px 22px 34px}.wz-steps .st{font-size:0}.wz-steps .st b{margin-right:0;font-size:13px}}
 
-  .estimate{background:linear-gradient(155deg,var(--pine),var(--pine-deep));color:var(--white);border-radius:16px;padding:26px 28px;margin-top:8px;position:relative;overflow:hidden;box-shadow:0 26px 50px -32px rgba(30,51,40,.8)}
+  .estimate{background:linear-gradient(155deg,var(--pine),var(--pine-deep));color:var(--white);border-radius:16px;padding:26px 28px;margin-top:8px;position:relative;overflow:hidden;box-shadow:0 26px 50px -32px rgba(30,51,40,.8);transform:translateZ(0)}
+  .estimate .amt{transform:translateZ(0)}
   .estimate::after{content:"";position:absolute;top:-40%;right:-10%;width:240px;height:240px;background:radial-gradient(circle,var(--glow),transparent 70%);opacity:.5}
   .estimate .lbl{font-family:"Space Mono";font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--honey-soft);position:relative}
   .estimate .amt{font-family:"Space Grotesk";font-weight:700;font-size:40px;margin:6px 0 2px;position:relative;color:#fff}
@@ -287,6 +302,19 @@
   .pm-x:hover{background:var(--panel);transform:rotate(90deg)}
   .pm-media{background:#fff;border-right:1px solid var(--line);padding:22px;display:flex;flex-direction:column;gap:14px;border-radius:22px 0 0 22px}
   .pm-img{width:100%;aspect-ratio:4/3;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px}
+  .pm-stage{width:100%}
+  .pm-frame{width:100%;height:min(70vh,560px);border:1px solid var(--line);border-radius:14px;background:#fff;display:block}
+  .pm-frame-open{align-self:flex-end;font-family:"Space Grotesk";font-weight:600;font-size:13px;color:var(--pine);text-decoration:none;border:1px solid var(--line);border-radius:9px;padding:7px 12px;background:var(--paper)}
+  .pm-frame-open:hover{border-color:var(--pine);background:var(--white)}
+  .pm-frame-open[hidden]{display:none}
+  .pm-img[hidden],.pm-frame[hidden]{display:none}
+  .pm-thumb.pm-doc{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--pine);font-family:"Space Grotesk";font-weight:600;font-size:9px;line-height:1.15;text-align:center;padding:6px}
+  .pm-thumb.pm-doc svg{width:22px;height:22px}
+  /* full plan set expands to a large, legible viewer */
+  .pm-dialog.pdf-mode{grid-template-columns:1fr;width:min(1180px,96vw)}
+  .pm-dialog.pdf-mode .pm-info{display:none}
+  .pm-dialog.pdf-mode .pm-media{border-right:0;border-radius:22px;padding:16px}
+  .pm-dialog.pdf-mode .pm-frame{height:min(80vh,860px)}
   .pm-thumbs{display:flex;gap:10px;flex-wrap:wrap}
   .pm-thumb{flex:0 0 auto;width:88px;height:66px;border:1.6px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;cursor:pointer;padding:0;transition:border-color .15s,box-shadow .2s}
   .pm-thumb img{width:100%;height:100%;object-fit:contain;padding:4px}
@@ -400,9 +428,10 @@
       Woodstock<span class="brand-adu">ADU</span>
     </a>
     <nav class="nav-links" id="navLinks" aria-label="Primary">
-      <a href="#plans">Plans</a>
+      <a href="/plans/">Plans</a>
+      <a href="/cost">Cost</a>
+      <a href="/rules">Rules</a>
       <a href="#how">How it works</a>
-      <a href="#build">Pricing &amp; eligibility</a>
       <a href="#faq">FAQ</a>
     </nav>
     <div class="nav-cta">
@@ -429,7 +458,10 @@
 
     <div class="siteplan" data-parallax>
       <div class="stamp">Pre-Approved</div>
-      <img src="assets/plans/overlook.png" width="1000" height="862" fetchpriority="high" decoding="async" alt="The Overlook — a 1,064 sq ft pre-approved Woodstock ADU with a second-floor deck and gable roof">
+      <picture>
+        <source type="image/webp" srcset="assets/plans/overlook-640.webp 640w, assets/plans/overlook.webp 1000w" sizes="(max-width:880px) 92vw, 46vw">
+        <img src="assets/plans/overlook.png" width="1000" height="862" fetchpriority="high" decoding="async" alt="The Overlook — a 1,064 sq ft pre-approved Woodstock ADU with a second-floor deck and gable roof">
+      </picture>
       <div class="caption">The Overlook · 1,064 sq ft</div>
     </div>
   </div>
@@ -470,7 +502,7 @@
             <button class="btn btn-primary" id="wzCheck">Check</button>
           </div>
           <div id="map"></div>
-          <p class="help" style="margin-top:-8px;margin-bottom:16px">Tip: if the pin lands slightly off, drag it onto your house or click your lot.</p>
+          <p class="help" style="margin-top:-8px;margin-bottom:16px">Drag the pin onto your house if it's off — the address box above updates to match the pin, so make sure it's correct.</p>
           <div class="elig-card" id="eligCard" aria-live="polite"></div>
           <div class="wz-foot">
             <span class="disc">Data source: City of Woodstock GIS. Geocoding by OpenStreetMap.</span>
@@ -565,7 +597,7 @@
   <div class="wrap">
     <div class="sec-head" data-reveal><span class="eyebrow">The five pre-approved designs</span><h2>Already reviewed by the City. Ready to build.</h2><p>Each plan has passed structural, architectural, and zoning review — which is what shortens your permit timeline. Larger plans need larger primary homes (an ADU can be up to 40% of your main home's floor area).</p></div>
     <div class="plans" id="plansGrid" data-reveal-group></div>
-    <p style="margin-top:22px;font-size:15px;color:var(--ink-soft)">Want different materials, windows, or layout? You can customize any plan through our design professional. <a href="#build" style="color:var(--pine);font-weight:600">Check your lot &amp; price it →</a></p>
+    <p style="margin-top:22px;font-size:15px;color:var(--ink-soft)">Want different materials, windows, or layout? You can customize any plan through our design professional. <a href="/plans/" style="color:var(--pine);font-weight:600">Compare all five plans in detail →</a> · <a href="#build" style="color:var(--pine);font-weight:600">Check your lot &amp; price it →</a></p>
   </div>
 </section>
 
@@ -592,7 +624,7 @@
     <details><summary>Can I rent out my ADU?<span class="pl">+</span></summary><div class="ans">Yes — as long as one of the two homes on the property is owner-occupied. Live in the main house and rent the ADU, or live in the ADU and rent the main house.</div></details>
     <details><summary>How long does permitting take?<span class="pl">+</span></summary><div class="ans">Because the plans are pre-approved by the City, the remaining review is shorter and more predictable than a custom ADU. We give you a timeline for your specific lot after the eligibility check.</div></details>
     <details><summary>Can I customize the plan?<span class="pl">+</span></summary><div class="ans">Yes. Modify materials, windows, and interior layouts through a licensed design professional, which we coordinate as part of the project.</div></details>
-    <details><summary>What does it cost?<span class="pl">+</span></summary><div class="ans">One fixed price per plan, confirmed after a site visit. The configurator above gives an instant estimate; City permit and impact fees are itemized separately and explained up front.</div></details>
+    <details><summary>What does it cost?<span class="pl">+</span></summary><div class="ans">One fixed price per plan, confirmed after a site visit. The configurator above gives an instant estimate; City permit and impact fees are itemized separately and explained up front. See the full <a href="/cost" style="color:var(--pine);font-weight:600">ADU cost guide →</a></div></details>
     <details><summary>Do I have to live inside Woodstock city limits?<span class="pl">+</span></summary><div class="ans">For this program, yes. A "Woodstock" mailing address isn't a guarantee — many are in unincorporated Cherokee County. Our address tool checks your jurisdiction against the City's own GIS.</div></details>
     </div>
   </div>
@@ -607,7 +639,7 @@
         <p>Turnkey, fixed-price accessory dwelling units for Woodstock homeowners. Licensed Georgia residential contractor.</p>
         <p style="margin-top:8px">GA License #________ · Insured · woodstockadu.com</p>
       </div>
-      <div class="foot-col"><h4>Explore</h4><p><a href="#plans">The five plans</a><br><a href="#how">How it works</a><br><a href="#build">Eligibility &amp; pricing</a><br><a href="#faq">FAQ</a></p></div>
+      <div class="foot-col"><h4>Explore</h4><p><a href="/plans/">The five plans</a><br><a href="/cost">ADU cost guide</a><br><a href="/rules">Rules &amp; zoning</a><br><a href="#how">How it works</a><br><a href="#faq">FAQ</a></p></div>
       <div class="foot-col"><h4>Get started</h4><p><a href="#build">Check your address</a><br><a href="mailto:hello@woodstockadu.com">hello@woodstockadu.com</a><br>(770) 000-0000<br>Woodstock, GA 30188</p></div>
     </div>
     <p class="disclaimer">Woodstock ADU is an independent, privately owned contractor. We are not affiliated with, endorsed by, or an official agent of the City of Woodstock. References to the City's Pre-Approved ADU Program describe a public program available to eligible residents. The eligibility tool queries public City of Woodstock GIS data for guidance only and is not a substitute for an official zoning determination; eligibility, plan availability, fees, and requirements are set by the City and subject to change. Pricing shown is an illustrative estimate, not a quote. We confirm current details and provide a guaranteed fixed price after an on-site assessment.</p>
@@ -626,7 +658,11 @@
   <div class="pm-dialog" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
     <button class="pm-x" type="button" data-pmclose aria-label="Close plan details">&times;</button>
     <div class="pm-media">
-      <img class="pm-img" id="pmImg" alt="" width="800" height="600">
+      <div class="pm-stage">
+        <img class="pm-img" id="pmImg" alt="" width="800" height="600">
+        <iframe class="pm-frame" id="pmFrame" title="Full plan set" hidden></iframe>
+      </div>
+      <a class="pm-frame-open" id="pmFrameOpen" target="_blank" rel="noopener" hidden>Open in a new tab ↗</a>
       <div class="pm-thumbs" id="pmThumbs"></div>
     </div>
     <div class="pm-info">
@@ -636,7 +672,7 @@
       <p class="pm-note">Want different materials, windows, or interior layout? Any plan can be customized through our licensed design professional.</p>
       <div class="pm-cta">
         <button class="btn btn-honey" type="button" id="pmPrice">Price this plan →</button>
-        <button class="btn btn-ghost" type="button" data-pmclose>Close</button>
+        <a class="btn btn-ghost" id="pmOpen" href="#" target="_blank" rel="noopener" hidden>Full plan set (PDF) ↗</a>
       </div>
     </div>
   </div>
@@ -693,10 +729,30 @@ function setPin(lat,lng,run){
   state.lat=lat; state.lng=lng;
   if(!marker){
     marker = L.marker([lat,lng],{draggable:true}).addTo(map);
-    marker.on('dragend', ()=>{const p=marker.getLatLng(); state.lat=p.lat; state.lng=p.lng; runEligibility();});
+    marker.on('dragend', ()=>{const p=marker.getLatLng(); state.lat=p.lat; state.lng=p.lng; resolvePinAddress(); runEligibility();});
   } else marker.setLatLng([lat,lng]);
   map.setView([lat,lng],17);
+  resolvePinAddress();
   if(run) runEligibility();
+}
+
+/* ---------- Reverse geocode: show the pin's address so the user (and we) can verify it ---------- */
+let pinSeq=0;
+async function reverseGeocode(lat,lng){
+  try{
+    const url='https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=18&addressdetails=1&lat='+lat+'&lon='+lng;
+    const d=await (await fetch(url,{headers:{'Accept':'application/json'}})).json();
+    const a=d.address||{};
+    const line=[[a.house_number,a.road].filter(Boolean).join(' '), a.city||a.town||a.village||a.hamlet, a.state, a.postcode].filter(Boolean).join(', ');
+    return line || d.display_name || null;
+  }catch(e){ return null; }
+}
+async function resolvePinAddress(){
+  const seq=++pinSeq;
+  const input=document.getElementById('wzAddr');
+  const addr=await reverseGeocode(state.lat,state.lng);
+  if(seq!==pinSeq) return;            // a newer pin move superseded this lookup
+  if(addr){ state.address=addr; if(input) input.value=addr; }
 }
 
 /* ---------- Geocode (OpenStreetMap / Nominatim) ----------
@@ -783,6 +839,7 @@ function gotoStep(n){
     const sn=+s.dataset.step; s.classList.toggle('active',sn===n); s.classList.toggle('done',sn<n);
   });
   if(n===2) renderPlans2();
+  if(n===3) estimate();
   if(n===4) renderSummary();
   // Keep the step bar in view, but only scroll when the wizard is actually
   // off-screen — prevents the page from jumping on every Continue/Back click.
@@ -804,11 +861,14 @@ function renderPlans2(){
   const grid=document.getElementById('planPick');
   grid.innerHTML=PLANS.map(p=>{
     const fits = !maxAdu || p.sf<=maxAdu;
-    return `<div class="pp-wrap">
+    const tip = fits ? '' : ` title="The ${p.name} is ${p.sf} sq ft. Under Woodstock's 40% rule, an ADU can be at most 40% of your primary home — so this plan needs a home of at least ${p.minPrimary.toLocaleString()} sq ft. You entered ${sf.toLocaleString()} sq ft."`;
+    return `<div class="pp-wrap"${tip}>
       <button type="button" class="pp ${fits?'':'unfit'}" data-plan="${p.id}" ${fits?'':'disabled'} aria-pressed="${state.plan===p.id}">
+        <div class="pp-art"><img src="${p.img}" alt="${p.name} front elevation" loading="lazy"></div>
         <div class="sf">${p.name}</div><div class="cf">${p.sf} sq ft · ${p.cfg}</div>
-        <div class="mn">${fits?'FITS YOUR LOT':'NEEDS A LARGER HOME'}</div></button>
-      <button type="button" class="pp-view" data-view="${p.id}">View floor plan ↗</button>
+        <div class="mn">${fits?'FITS YOUR LOT':"DOESN'T FIT YOUR HOME"}</div></button>
+      ${fits?'':`<div class="pp-why"><b>Needs a ${p.minPrimary.toLocaleString()}+ sq ft home</b> — yours is ${sf.toLocaleString()} sq ft</div>`}
+      <button type="button" class="pp-view" data-view="${p.id}">View plans ↗</button>
     </div>`;
   }).join('');
   grid.querySelectorAll('.pp:not(.unfit)').forEach(b=>b.onclick=()=>{
@@ -855,7 +915,7 @@ function renderSummary(){
   const t=priceOf(); const lo=t?Math.round(t*0.94/1000)*1000:0, hi=t?Math.round(t*1.06/1000)*1000:0;
   const adds=[...state.addons].map(id=>ADDONS.find(a=>a.id===id).label);
   document.getElementById('summary').innerHTML=`
-    <div class="sr"><span>Address</span><b>${state.lat?state.lat.toFixed(4)+', '+state.lng.toFixed(4):'—'}</b></div>
+    <div class="sr"><span>Address</span><b>${state.address || (state.lat?state.lat.toFixed(4)+', '+state.lng.toFixed(4):'—')}</b></div>
     <div class="sr"><span>Zoning</span><b>${state.zoning||'—'}</b></div>
     <div class="sr"><span>Plan</span><b>${p?p.name+' · '+p.sf+' sq ft':'—'}</b></div>
     <div class="sr"><span>Finish level</span><b style="text-transform:capitalize">${state.tier}</b></div>
@@ -893,7 +953,7 @@ async function submitLead(intent){
   const p=PLANS.find(x=>x.id===state.plan), t=priceOf();
   const payload={
     intent, name, email, phone,
-    address: val('wzAddr') || val('heroAddr') || '',
+    address: state.address || val('wzAddr') || val('heroAddr') || '',
     lat:state.lat, lng:state.lng, zoning:state.zoning, inCity:state.inCity,
     plan: p?`${p.name} (${p.sf} sq ft)`:'', tier:state.tier, addons:[...state.addons],
     estimate: t?Math.round(t):null, source:'woodstockadu.com'
@@ -924,25 +984,60 @@ document.getElementById('reserveBtn').onclick=async function(){
 /* plans gallery — each card opens a detail modal */
 document.getElementById('plansGrid').innerHTML=PLANS.map(p=>`
   <button type="button" class="plan" data-plan="${p.id}" aria-haspopup="dialog">
-    <div class="art"><img src="${p.img}" alt="${p.name} — front elevation of the ${p.sf} sq ft pre-approved Woodstock ADU" loading="lazy" width="1000"></div>
+    <div class="art"><picture><source type="image/webp" srcset="${p.img.replace(/\.png$/,'.webp')}"><img src="${p.img}" alt="${p.name} — front elevation of the ${p.sf} sq ft pre-approved Woodstock ADU" loading="lazy" decoding="async" width="1000"></picture></div>
     <div class="pb"><div class="sf">${p.name}</div><div class="cf"><b class="mono" style="color:var(--honey)">${p.sf} SQ FT</b> · ${p.cfg}</div>
     <div class="mn">MIN. PRIMARY HOME — ${p.minPrimary.toLocaleString()} SQ FT</div>
-    <div class="vw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>View floor plan &amp; specs →</div>
+    <div class="vw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>View plans &amp; specs →</div>
   </button>`).join('');
 document.querySelectorAll('#plansGrid .plan').forEach(b=>b.addEventListener('click',()=>openPlan(b.dataset.plan)));
 
 /* ---- plan detail modal ---- */
 const planModal=document.getElementById('planModal');
 const pmImg=document.getElementById('pmImg');
+const pmFrame=document.getElementById('pmFrame');
 const pmThumbs=document.getElementById('pmThumbs');
+const pmOpen=document.getElementById('pmOpen');
+const pmFrameOpen=document.getElementById('pmFrameOpen');
+const pmDialog=planModal.querySelector('.pm-dialog');
 let pmCurrent=null, pmOpener=null;
 
-function pmThumbFail(img){
-  const t=img.closest('.pm-thumb');
-  t.classList.add('soon'); t.setAttribute('aria-pressed','false');
-  t.innerHTML=t.dataset.label+'<br>coming soon';
+function pmSelect(thumb){
+  pmThumbs.querySelectorAll('.pm-thumb').forEach(x=>x.setAttribute('aria-pressed','false'));
+  if(thumb) thumb.setAttribute('aria-pressed','true');
 }
-function openPlan(id){
+function pmShowImg(src,alt,thumb){
+  pmDialog.classList.remove('pdf-mode');
+  pmFrame.hidden=true; pmFrame.removeAttribute('src');
+  pmFrameOpen.hidden=true;
+  pmImg.hidden=false; pmImg.src=src; pmImg.alt=alt;
+  pmSelect(thumb);
+}
+function pmShowPdf(src,thumb){
+  pmDialog.classList.add('pdf-mode');
+  pmImg.hidden=true;
+  pmFrame.src=src; pmFrame.hidden=false;
+  pmFrameOpen.href=src; pmFrameOpen.hidden=false;
+  pmSelect(thumb);
+}
+function pmImgThumb(p,src,label,pressed){
+  const t=document.createElement('button');
+  t.type='button'; t.className='pm-thumb'; t.title=label; t.setAttribute('aria-pressed',pressed?'true':'false');
+  t.innerHTML=`<img src="${src}" alt="${p.name} — ${label}">`;
+  t.querySelector('img').onerror=()=>{ t.classList.add('soon'); t.setAttribute('aria-pressed','false'); t.innerHTML=label+'<br>coming soon'; };
+  t.onclick=()=>{ if(!t.classList.contains('soon')) pmShowImg(src,`${p.name} — ${label}`,t); };
+  return t;
+}
+function pmDocThumb(label,available,onClick){
+  const t=document.createElement('button');
+  t.type='button'; t.title=label;
+  t.className = available ? 'pm-thumb pm-doc' : 'pm-thumb soon';
+  if(available){
+    t.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg><span>'+label+'</span>';
+    t.onclick=onClick;
+  } else { t.innerHTML=label+'<br>coming soon'; }
+  return t;
+}
+async function openPlan(id){
   const p=PLANS.find(x=>x.id===id); if(!p) return;
   pmCurrent=id; pmOpener=document.activeElement;
   document.getElementById('pmTitle').textContent=p.name;
@@ -950,22 +1045,31 @@ function openPlan(id){
      `<div class="r"><span>Size</span><b>${p.sf.toLocaleString()} sq ft</b></div>`
     +`<div class="r"><span>Layout</span><b>${p.cfg}</b></div>`
     +`<div class="r"><span>Min. primary home</span><b>${p.minPrimary.toLocaleString()} sq ft</b></div>`;
-  pmImg.src=p.img; pmImg.alt=`${p.name} — front elevation`;
-  const views=[{src:p.img,label:'Front elevation'},{src:p.floor,label:'Floor plan'}];
-  pmThumbs.innerHTML=views.map((v,i)=>
-    `<button type="button" class="pm-thumb" data-src="${v.src}" data-label="${v.label}" aria-pressed="${i===0}" title="${v.label}"><img src="${v.src}" alt="${p.name} — ${v.label}" onerror="pmThumbFail(this)"></button>`
-  ).join('');
-  pmThumbs.querySelectorAll('.pm-thumb').forEach(t=>t.addEventListener('click',()=>{
-    if(t.classList.contains('soon')) return;
-    pmImg.src=t.dataset.src; pmImg.alt=`${p.name} — ${t.dataset.label}`;
-    pmThumbs.querySelectorAll('.pm-thumb').forEach(x=>x.setAttribute('aria-pressed','false'));
-    t.setAttribute('aria-pressed','true');
-  }));
+  pmThumbs.innerHTML='';
+  const tEl=pmImgThumb(p,p.img,'Front elevation',true);
+  pmThumbs.append(tEl);
+  // floor-plan thumb appears only if that image actually exists — no "coming soon" tile
+  if(p.floor){ const probe=new Image(); probe.onload=()=>{ if(pmCurrent===id) tEl.after(pmImgThumb(p,p.floor,'Floor plan',false)); }; probe.src=p.floor; }
+  pmShowImg(p.img,`${p.name} — front elevation`,tEl);
+  pmOpen.hidden=true; pmOpen.removeAttribute('href');
   planModal.hidden=false; document.body.classList.add('pm-open');
   document.querySelector('.pm-x').focus();
+  // probe whether the full plan-set PDF is available
+  let ok=true;
+  try{ ok=(await fetch(p.pdf,{method:'HEAD'})).status!==404; }catch(e){ ok=true; }
+  if(pmCurrent!==id) return;
+  if(ok){
+    const tPdf=pmDocThumb('Full plan set',true,()=>pmShowPdf(p.pdf,tPdf));
+    pmThumbs.append(tPdf);
+    pmOpen.href=p.pdf; pmOpen.textContent='Full plan set (PDF) ↗'; pmOpen.hidden=false;
+  } else {
+    pmThumbs.append(pmDocThumb('Full plan set',false));
+  }
 }
 function closePlan(){
   planModal.hidden=true; document.body.classList.remove('pm-open');
+  pmFrame.hidden=true; pmFrame.removeAttribute('src'); pmImg.hidden=false;
+  pmDialog.classList.remove('pdf-mode');
   if(pmOpener&&pmOpener.focus) pmOpener.focus();
 }
 planModal.querySelectorAll('[data-pmclose]').forEach(el=>el.addEventListener('click',closePlan));
@@ -974,6 +1078,15 @@ document.getElementById('pmPrice').addEventListener('click',()=>{
   if(id){ state.plan=id; gotoStep(2); }
 });
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&!planModal.hidden) closePlan(); });
+// keep keyboard focus inside the open dialog (accessibility)
+planModal.addEventListener('keydown',e=>{
+  if(e.key!=='Tab' || planModal.hidden) return;
+  const f=[...pmDialog.querySelectorAll('button,a[href],iframe,input,[tabindex]:not([tabindex="-1"])')].filter(el=>el.offsetParent!==null);
+  if(!f.length) return;
+  const first=f[0], last=f[f.length-1];
+  if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+  else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+});
 
 /* init */
 renderOpts(); estimate(); initMap();
@@ -1079,5 +1192,8 @@ renderOpts(); estimate(); initMap();
   }
 })();
 </script>
+<!-- Cloudflare Web Analytics: paste your token from CF dashboard → your Pages project → Web Analytics.
+     (Or enable "Automatic Setup" in Cloudflare and delete this tag.) -->
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "REPLACE_WITH_CF_WEB_ANALYTICS_TOKEN"}'></script>
 </body>
 </html>

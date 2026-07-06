@@ -1,0 +1,12 @@
+{
+  "name": "Woodstock ADU",
+  "short_name": "Woodstock ADU",
+  "description": "Pre-approved, fixed-price accessory dwelling units in Woodstock, GA.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B1510",
+  "theme_color": "#2C4A3B",
+  "icons": [
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any" }
+  ]
+}
