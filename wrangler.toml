@@ -18,8 +18,8 @@ database_id = "3c71e7c4-a0ab-4ce6-85e8-3d803d924c32"
 # Set RESEND_API_KEY as a SECRET, not here:
 #   npx wrangler pages secret put RESEND_API_KEY
 [vars]
-# TODO(owner): LEAD_TO is a PLACEHOLDER — lead notification emails go nowhere
-# until this is a real inbox. Also set the RESEND_API_KEY secret to enable email,
-# and TURNSTILE_SECRET to turn on captcha verification in /api/lead.
-LEAD_TO = "you@woodstockadu.com"
+# TODO(owner): set the RESEND_API_KEY secret (with woodstockadu.com verified in
+# Resend) to enable email notifications, and TURNSTILE_SECRET to turn on captcha
+# verification in /api/lead.
+LEAD_TO = "peterranney@gmail.com"
 LEAD_FROM = "leads@woodstockadu.com"

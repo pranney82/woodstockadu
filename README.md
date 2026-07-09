@@ -101,13 +101,13 @@ Runs the site and `/api/lead` locally. Put local secrets in a `.dev.vars` file
   a payment link" instead of promising a checkout redirect.
 - **Real pricing** — confirm the `base` prices in the `PLANS` array in `public/index.html`
   (also published on /cost and the plan pages' Product schema).
-- **LEAD_TO** — `wrangler.toml` still points lead notifications at a placeholder inbox;
-  set a real address and the `RESEND_API_KEY` secret.
+- **RESEND_API_KEY** — LEAD_TO now points at peterranney@gmail.com; set the
+  `RESEND_API_KEY` secret (and verify woodstockadu.com in Resend) to enable emails.
 - **Turnstile** — add the widget site key on the form and set the `TURNSTILE_SECRET`
   secret; `/api/lead` starts enforcing it automatically once the secret exists.
-- **Real NAP + GA license #** — footer and JSON-LD now deliberately omit phone/street
-  address/license number (placeholders were worse than nothing). Add real ones
-  everywhere at once when available.
+- **Street address + GA license #** — real phone ((404) 308-3305) and email
+  (peterranney@gmail.com) are live in footers and JSON-LD; street address and
+  license number are still omitted — add them everywhere at once when available.
 - **www subdomain** — `www.woodstockadu.com` 522s; add it as a custom domain (or
   redirect) in the Pages project.
 - **Cloudflare Web Analytics** — beacon tags were removed (they carried a placeholder
