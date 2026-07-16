@@ -68,29 +68,14 @@ wrangler d1 execute woodstockadu-leads --remote \
   --command "SELECT created_at,intent,name,email,phone,plan,estimate FROM leads ORDER BY id DESC LIMIT 20"
 ```
 
-## 4. (Optional) Email notifications via Resend
-
-Lead storage works without this. To also get an email per lead:
-
-1. Create a free [Resend](https://resend.com) account and **verify woodstockadu.com**
-   as a sending domain (add the DNS records they give you).
-2. Set the values:
-   - In `wrangler.toml` `[vars]`: `LEAD_TO` (where you want leads) and `LEAD_FROM`
-     (a verified address like `leads@woodstockadu.com`).
-   - The API key as a **secret**:
-     ```bash
-     wrangler pages secret put RESEND_API_KEY
-     ```
-     (or Pages → Settings → Environment variables → add `RESEND_API_KEY`, encrypted).
-
-## 5. Local development
+## 4. Local development
 
 ```bash
 wrangler pages dev
 ```
 
 Runs the site and `/api/lead` locally. Put local secrets in a `.dev.vars` file
-(git-ignored): `RESEND_API_KEY=...`.
+(git-ignored): `TURNSTILE_SECRET=...`.
 
 ---
 
@@ -101,8 +86,9 @@ Runs the site and `/api/lead` locally. Put local secrets in a `.dev.vars` file
   a payment link" instead of promising a checkout redirect.
 - **Real pricing** — confirm the `base` prices in the `PLANS` array in `public/index.html`
   (also published on /cost and the plan pages' Product schema).
-- **RESEND_API_KEY** — LEAD_TO now points at peterranney@gmail.com; set the
-  `RESEND_API_KEY` secret (and verify woodstockadu.com in Resend) to enable emails.
+- **Lead alerts** — leads are stored in D1 only (no email service by choice). Check
+  them with the `wrangler d1 execute` query above, or wire a notification channel
+  later (e.g. a Worker cron that pings you about new rows).
 - **Turnstile** — add the widget site key on the form and set the `TURNSTILE_SECRET`
   secret; `/api/lead` starts enforcing it automatically once the secret exists.
 - **Street address + GA license #** — real phone ((404) 308-3305) and email

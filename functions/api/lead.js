@@ -1,16 +1,15 @@
 /**
  * POST /api/lead  — Cloudflare Pages Function
- * Receives a lead from the site, stores it in D1, and (optionally) emails a
- * notification via Resend. Fails soft between channels (if email isn't
- * configured the lead is still saved), but fails LOUD if nothing could be
- * recorded at all, so the front-end can show its mailto fallback instead of
- * a false success message.
+ * Receives a lead from the site and stores it in D1. Fails LOUD (500) if the
+ * lead can't be recorded, so the front-end shows its email/phone fallback
+ * instead of a false success message.
+ *
+ * View leads:
+ *   npx wrangler d1 execute woodstockadu-leads --remote \
+ *     --command "SELECT created_at,intent,name,email,phone,plan,estimate FROM leads ORDER BY id DESC LIMIT 20"
  *
  * Bindings / secrets (set in Cloudflare dashboard or wrangler.toml):
  *   DB               -> D1 database binding (required to store leads)
- *   RESEND_API_KEY   -> secret, optional (enables email notifications)
- *   LEAD_TO          -> var, optional (where notifications go, e.g. you@woodstockadu.com)
- *   LEAD_FROM        -> var, optional (verified Resend sender, e.g. leads@woodstockadu.com)
  *   TURNSTILE_SECRET -> secret, optional. When set, requests must include a
  *                       valid `turnstileToken` (add the Turnstile widget on the
  *                       form and pass its token in the payload). Until it is
@@ -102,74 +101,27 @@ export async function onRequestPost(context) {
     ip: request.headers.get("cf-connecting-ip") || "",
   };
 
-  // 1) Store in D1 (if bound)
-  let stored = false;
-  if (env.DB) {
-    try {
-      await env.DB.prepare(
-        `INSERT INTO leads
-          (created_at,intent,name,email,phone,address,lat,lng,zoning,in_city,plan,tier,addons,estimate,source,user_agent,ip)
-         VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
+  // Store in D1 — the only record of the lead, so failure is a real failure.
+  try {
+    await env.DB.prepare(
+      `INSERT INTO leads
+        (created_at,intent,name,email,phone,address,lat,lng,zoning,in_city,plan,tier,addons,estimate,source,user_agent,ip)
+       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
+    )
+      .bind(
+        lead.created_at, lead.intent, lead.name, lead.email, lead.phone,
+        lead.address, lead.lat, lead.lng, lead.zoning, lead.in_city,
+        lead.plan, lead.tier, lead.addons, lead.estimate, lead.source,
+        lead.user_agent, lead.ip
       )
-        .bind(
-          lead.created_at, lead.intent, lead.name, lead.email, lead.phone,
-          lead.address, lead.lat, lead.lng, lead.zoning, lead.in_city,
-          lead.plan, lead.tier, lead.addons, lead.estimate, lead.source,
-          lead.user_agent, lead.ip
-        )
-        .run();
-      stored = true;
-    } catch (e) {
-      // keep going — we still try to email so a lead is never lost
-      console.error("D1 insert failed", e);
-    }
-  }
-
-  // 2) Email notification (if Resend configured)
-  let emailed = false;
-  if (env.RESEND_API_KEY && env.LEAD_TO && env.LEAD_FROM) {
-    const subject = `New ${lead.intent} lead — ${lead.name.replace(/[\r\n]/g, " ")}`;
-    const body = [
-      `Intent:   ${lead.intent}`,
-      `Name:     ${lead.name}`,
-      `Email:    ${lead.email}`,
-      `Phone:    ${lead.phone}`,
-      `Address:  ${lead.address}`,
-      `Zoning:   ${lead.zoning} (in city: ${lead.in_city ? "yes" : "no"})`,
-      `Plan:     ${lead.plan}  |  Finish: ${lead.tier}`,
-      `Add-ons:  ${lead.addons || "none"}`,
-      `Estimate: ${lead.estimate ? "$" + lead.estimate.toLocaleString() : "—"}`,
-      `Source:   ${lead.source}`,
-      `When:     ${lead.created_at}`,
-    ].join("\n");
-
-    try {
-      const r = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          authorization: `Bearer ${env.RESEND_API_KEY}`,
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          from: env.LEAD_FROM,
-          to: env.LEAD_TO,
-          reply_to: emailValid ? lead.email : undefined,
-          subject,
-          text: body,
-        }),
-      });
-      if (r.ok) emailed = true;
-      else console.error("Resend rejected email", r.status, await r.text());
-    } catch (e) {
-      console.error("Resend email failed", e);
-    }
-  }
-
-  // Nothing recorded anywhere → tell the truth so the UI shows its fallback.
-  if (!stored && !emailed) {
+      .run();
+  } catch (e) {
+    console.error("D1 insert failed", e);
+    // Tell the truth so the UI shows its email/phone fallback.
     return json({ ok: false, error: "not_recorded" }, 500);
   }
-  return json({ ok: true, stored, emailed });
+
+  return json({ ok: true });
 }
 
 // Non-POST methods: 204 for OPTIONS (same-origin use needs no CORS headers),

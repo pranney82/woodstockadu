@@ -14,12 +14,8 @@ binding = "DB"
 database_name = "woodstockadu-leads"
 database_id = "3c71e7c4-a0ab-4ce6-85e8-3d803d924c32"
 
-# Non-secret vars for email notifications (optional).
-# Set RESEND_API_KEY as a SECRET, not here:
-#   npx wrangler pages secret put RESEND_API_KEY
-[vars]
-# TODO(owner): set the RESEND_API_KEY secret (with woodstockadu.com verified in
-# Resend) to enable email notifications, and TURNSTILE_SECRET to turn on captcha
-# verification in /api/lead.
-LEAD_TO = "peterranney@gmail.com"
-LEAD_FROM = "leads@woodstockadu.com"
+# Leads are stored in D1 only (no email notifications — owner opted out of Resend).
+# View them: npx wrangler d1 execute woodstockadu-leads --remote \
+#   --command "SELECT created_at,intent,name,email,phone,plan,estimate FROM leads ORDER BY id DESC LIMIT 20"
+# TODO(owner): set the TURNSTILE_SECRET secret to turn on captcha verification
+# in /api/lead:  npx wrangler pages secret put TURNSTILE_SECRET
